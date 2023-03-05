@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>Tetris</title>
+    <style>
+      html, body {
+        overflow: hidden;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      canvas {
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+      @font-face {
+        font-family: Minecraft;
+        src: url(./assets/Minecraft.otf);
+      }
+    </style>
+  </head>
+  <body onload="">
+    <canvas id="screen" width="1920" height="1080"></canvas>
+    <script type="module" src="windowManager/main.js" defer></script>
+  </body>
+</html>
