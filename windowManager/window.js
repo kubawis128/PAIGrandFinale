@@ -13,19 +13,20 @@ export class Window{
         this.canvas.width = width;
         this.canvas.height = height;
         this.canvas.style.left = x + "px";
-        this.canvas.style.top = (y-30)+60 + "px"; 
+        this.canvas.style.top = y+30 + "px"; 
         this.renderer = rend
-
+        this.uuid = this.generatePseudoRandomUUID()
+        this.canvas.style.scale = 1
     }
     
     draw(ctx){
         // Main window
         ctx.fillStyle = "#414348"
-        ctx.fillRect(this.x, this.y, this.width, this.height)
+        ctx.fillRect(this.x-3, this.y, this.width+6, this.height+33)
 
         // Tile Bar
         ctx.fillStyle = "#696969"
-        ctx.fillRect(this.x, this.y, this.width, 30)
+        ctx.fillRect(this.x-3, this.y, this.width+6, 30)
 
         // Window Title
         ctx.font = "24px Minecraft";
@@ -38,6 +39,7 @@ export class Window{
         ctx.fillStyle = "#FFFFFF"
         ctx.fillText("X", this.x+this.width-30+(ctx.measureText("X").width/2), this.y+24);
 
+        // Minimize Button
         ctx.fillStyle = "#3E54AC"
         ctx.fillRect(this.x+this.width-60, this.y+2, 26, 26)
         ctx.fillStyle = "#FFFFFF"
@@ -51,14 +53,13 @@ export class Window{
 
         if(this.instance){
             this.instance.destroy()
-            
         }
         document.body.removeChild(this.canvas)
     }
 
     destroyUI(){
-        this.renderer.window_list.pop(window)
-        document.body.removeChild(this.canvas)
+        //document.body.removeChild(this.canvas)
+        this.renderer.closeWindow(this)
     }
     
     setHolding(x,y){
@@ -66,5 +67,11 @@ export class Window{
         this.holdingY = y
         this.canvas.style.left = this.x + "px";
         this.canvas.style.top = (this.y-30)+60 + "px"; 
+    }
+    generatePseudoRandomUUID() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+            return v.toString(16);
+        });
     }
 }

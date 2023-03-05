@@ -3,13 +3,13 @@ export class DOOM{
         this.running = true
         let script = document.createElement("script")
         script.src = "https://www.midijs.net/lib/midi.js"
-        document.body.appendChild(script)
+        this.script = document.body.appendChild(script)
         let script1 = document.createElement("script")
         script1.src = "/doom/pcm-player.js"
-        document.body.appendChild(script1)
+        this.script1 = document.body.appendChild(script1)
         let script2 = document.createElement("script")
         script2.src = "/doom/mus2midi.js"
-        document.body.appendChild(script2)
+        this.script2 = document.body.appendChild(script2)
         this.memory = new WebAssembly.Memory({ initial : 108 });
         var memory = this.memory
         this.running = true
@@ -61,9 +61,9 @@ export class DOOM{
             initAudio(doom_screen,vol,pitch);
         }
 
-        function destroy(){
+        function destroyApp(){
             console.log("Stop running")
-            selfe.destroy()
+            selfe.destroyApp()
         }
         function arrayBufferToBase64( buffer ) {
             var binary = '';
@@ -85,7 +85,7 @@ export class DOOM{
                 js_draw_screen: drawCanvas,
                 js_play_sound: playSound,
                 js_play_music: playMusic,
-                js_destroy: destroy,
+                js_destroy: destroyApp,
             },
             env: {
                 memory: memory
@@ -166,12 +166,25 @@ export class DOOM{
             window.requestAnimationFrame(step);
         });
      }
-     destroy(){
+     destroyApp(){
+        this.script.remove()
+        this.script1.remove()
+        this.script2.remove()
         console.warn("Destroy called")
         this.running = false
         delete this.WebAssembly
         delete this.memory
         this.myWindow.destroyUI()
+        MIDIjs.stop();
+    }
+    destroy(){
+        this.script.remove()
+        this.script1.remove()
+        this.script2.remove()
+        console.warn("Destroy called")
+        this.running = false
+        delete this.WebAssembly
+        delete this.memory
         MIDIjs.stop();
     }
 }

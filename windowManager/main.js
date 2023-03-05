@@ -46,13 +46,20 @@ document.addEventListener("mousedown", (event) => {
         }
     }
 })
+
 let dragged_window = null
 document.addEventListener("mousedown", (event) => {
     if(event.target.id == "screen"){
-        dragged_window = renderer.getClickedWindow(event.clientX, event.clientY).window
-        dragged_window.setHolding(event.clientX, event.clientY)
+        let clicked = renderer.getClickedWindow(event.clientX, event.clientY)
+        console.log(clicked)
+        if(clicked){
+            dragged_window = clicked.window
+            dragged_window.setHolding(event.clientX, event.clientY)
+        }
+        
     }
 })
+
 document.addEventListener("mousemove", (event) => {
     if(dragged_window && event.target.id == "screen"){
         dragged_window.x -= dragged_window.holdingX - event.clientX
@@ -60,7 +67,11 @@ document.addEventListener("mousemove", (event) => {
         dragged_window.setHolding(event.clientX, event.clientY)
         update()
     }
+    if(dragged_window && event.target.id != "screen"){
+        dragged_window = null
+    }
 })
+
 document.addEventListener("mouseup", (event) => {
     if(event.target.id == "screen"){
         dragged_window = null

@@ -18,6 +18,17 @@ export class Desktop{
         // Task Bar
         this.ctx.fillStyle = "#696969"
         this.ctx.fillRect(0, this.canvas.height-32, this.canvas.width, this.canvas.height)
+        // Task Bar Items
+        let x = 86
+        this.renderer.window_list.forEach((window,index) => {
+            this.ctx.fillStyle = "#252525"
+            this.ctx.fillRect(x-2, this.canvas.height-28, this.ctx.measureText(window.title).width+4, 24)
+            this.ctx.font = "24px Minecraft";
+            this.ctx.fillStyle = "#FFFFFF"
+            this.ctx.fillText(window.title, x, this.canvas.height-28+22);
+            x += this.ctx.measureText(window.title).width + 8
+        })
+
 
         // Start button
         this.ctx.fillStyle = "#3E54AC"
@@ -45,7 +56,7 @@ export class Desktop{
         icons.forEach(icon => {
             this.ctx.drawImage(icon.texture, icon.x, icon.y)
             this.ctx.fillStyle = "#FFFFFF"
-            this.ctx.fillText(icon.name, icon.x-3, icon.y+88);
+            this.ctx.fillText(icon.name, icon.x + ((64 - this.ctx.measureText(icon.name).width)/2), icon.y+88);
         });
     }
 }

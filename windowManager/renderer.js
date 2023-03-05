@@ -9,7 +9,7 @@ export class Renderer{
         this.ctx.fillStyle = color
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
     }
-    
+
     addWindow(window){
         this.window_list.push(window)
     }
@@ -27,10 +27,14 @@ export class Renderer{
                 if(window.y <= y && window.y + 88 >= y){
                     if(window.x+window.width-30 <= x && window.x + window.width - 2 >= x){
                         found = {window: window, action: "close"}
-                        return {window: window, action: "close"}
+                        return
                     }
-                    found = {window: window, action: "Titlebar"}
-                    return {window: window, action: "Titlebar"}
+                    found = {window: window, action: "drag"}
+                    return
+                }
+                if(window.y + window.height <= y && window.y + window.height + 8 >= y - 30){
+                    found = {window: window, action: "scale", corner: "bottom"}
+                    return
                 }
             }
         })
@@ -39,8 +43,13 @@ export class Renderer{
         }
         return null
     }
+
     closeWindow(window){
-        this.window_list.pop(window)
         window.destroy()
+        let last = this.window_list
+        let index = last.indexOf(window)
+        if (index > -1) { // only splice array when item is found
+            last.splice(index, 1); // 2nd parameter means remove one item only
+        }
     }
 }
