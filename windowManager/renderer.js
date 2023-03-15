@@ -3,10 +3,11 @@ export class Renderer{
         this.canvas = canvas
         this.ctx = this.canvas.getContext("2d")
         this.window_list = []
+
         try {
-            ctx.beginPath()
-            ctx.roundRect(0,0,0,0,4)
-            ctx.fill()
+            this.ctx.beginPath()
+            this.ctx.roundRect(0,0,0,0,4)
+            this.ctx.fill()
             this.supportsRounded = true
         }catch (error){
             this.supportsRounded = false
@@ -20,16 +21,18 @@ export class Renderer{
     }
 
     addWindow(window){
+        //! Here add canvas to the body
         this.window_list.push(window)
     }
 
     updateWindows(){
+        // Call an update on them
         this.window_list.forEach(window => {
 
-            if(this.supportsRounded){
-                window.drawRounded(this.ctx)
+            if(!this.supportsRounded){
+                window.drawRounded()
             }else{
-                window.draw(this.ctx)
+                window.draw()
             }
         })
     }
@@ -59,6 +62,7 @@ export class Renderer{
     }
 
     closeWindow(window){
+        //! Here remove canvas from the body
         window.destroy()
         let last = this.window_list
         let index = last.indexOf(window)

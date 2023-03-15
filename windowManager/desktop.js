@@ -7,6 +7,7 @@ export class Desktop{
     }
     
     draw(){
+        
         // Background
         this.renderer.fillScreen("#252525")
         if(this.wallpaper != null){
@@ -60,6 +61,7 @@ export class Desktop{
     }
 }
 export class Icon{
+
     constructor(x, y, name, texture, exec){
         this.x = x
         this.y = y

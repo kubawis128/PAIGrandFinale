@@ -41,7 +41,7 @@ icons.push(new Icon(300, 100, "Calculator", assetLoader.assets.icons.doom, () =>
 
 document.addEventListener("mousedown", (event) => {
     //console.log(event)
-    if(event.target.id == "screen"){
+    if(event.target.id == "screen" || event.target.id == "titlebar"){
         icons.forEach(icon => {
             if(icon.check_collision(event.clientX, event.clientY)){
                 icon.exec()
@@ -56,7 +56,7 @@ document.addEventListener("mousedown", (event) => {
 
 let dragged_window = null
 document.addEventListener("mousedown", (event) => {
-    if(event.target.id == "screen"){
+    if(event.target.id == "screen" || event.target.id == "titlebar"){
         let clicked = renderer.getClickedWindow(event.clientX, event.clientY)
         console.log(clicked)
         if(clicked){
@@ -68,19 +68,19 @@ document.addEventListener("mousedown", (event) => {
 })
 
 document.addEventListener("mousemove", (event) => {
-    if(dragged_window && event.target.id == "screen"){
+    if(dragged_window && (event.target.id == "screen" || event.target.id == "titlebar")){
         dragged_window.x -= dragged_window.holdingX - event.clientX
         dragged_window.y -= dragged_window.holdingY - event.clientY
         dragged_window.setHolding(event.clientX, event.clientY)
         update()
     }
-    if(dragged_window && event.target.id != "screen"){
+    /*if(dragged_window && (event.target.id != "screen" || event.target.id != "titlebar")){
         dragged_window = null
-    }
+    }*/
 })
 
 document.addEventListener("mouseup", (event) => {
-    if(event.target.id == "screen"){
+    if(event.target.id == "screen" || event.target.id == "titlebar"){
         dragged_window = null
     }
 })
