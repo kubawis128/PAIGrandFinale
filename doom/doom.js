@@ -1,5 +1,6 @@
 export class DOOM{
     constructor(canvas, myWindow){
+        myWindow.canvas.setAttribute("tabindex", "0"); 
         this.running = true
         let script = document.createElement("script")
         script.src = "https://www.midijs.net/lib/midi.js"

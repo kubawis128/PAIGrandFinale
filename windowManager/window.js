@@ -44,8 +44,53 @@ export class Window{
         ctx.fillRect(this.x+this.width-60, this.y+2, 26, 26)
         ctx.fillStyle = "#FFFFFF"
         ctx.fillText("_", this.x+this.width-60+(ctx.measureText("_").width/2), this.y+24);
-    }
+        if(this.instance){
+            if(this.instance.draw){
+                this.instance.draw()
 
+            }
+        }
+    }
+    drawRounded(ctx){
+        console.log("Try to draw rounded windows")
+        // Main window
+        ctx.fillStyle = "#414348"
+        ctx.beginPath()
+        ctx.roundRect(this.x-3, this.y, this.width+6, this.height+33,24)
+        ctx.fill()
+
+        // Tile Bar
+        ctx.fillStyle = "#696969"
+        ctx.beginPath()
+        ctx.roundRect(this.x-3, this.y, this.width+6, 30,24)
+        ctx.fill()
+
+        // Window Title
+        ctx.font = "24px Minecraft";
+        ctx.fillStyle = "#FFFFFF"
+        ctx.fillText(this.title, this.x+(this.width/2)-(ctx.measureText(this.title).width/2), this.y+24);
+
+        // Close Button and it's text
+        ctx.fillStyle = "#DF2E38"
+        ctx.beginPath()
+        ctx.roundRect(this.x+this.width-30, this.y+2, 26, 26,4)
+        ctx.fill()
+        ctx.fillStyle = "#FFFFFF"
+        ctx.fillText("X", this.x+this.width-30+(ctx.measureText("X").width/2), this.y+24);
+
+        // Minimize Button
+        ctx.fillStyle = "#3E54AC"
+        ctx.beginPath()
+        ctx.roundRect(this.x+this.width-60, this.y+2, 26, 26,4)
+        ctx.fill()
+        ctx.fillStyle = "#FFFFFF"
+        ctx.fillText("_", this.x+this.width-60+(ctx.measureText("_").width/2), this.y+24);
+        if(this.instance){
+            if(this.instance.draw){
+                this.instance.draw()
+            }
+        }
+    }
     destroy(){
         console.log("destroy called quitting")
         console.log("instance: ",this)

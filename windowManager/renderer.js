@@ -3,6 +3,15 @@ export class Renderer{
         this.canvas = canvas
         this.ctx = this.canvas.getContext("2d")
         this.window_list = []
+        try {
+            ctx.beginPath()
+            ctx.roundRect(0,0,0,0,4)
+            ctx.fill()
+            this.supportsRounded = true
+        }catch (error){
+            this.supportsRounded = false
+        }
+        
     }
 
     fillScreen(color){
@@ -16,7 +25,12 @@ export class Renderer{
 
     updateWindows(){
         this.window_list.forEach(window => {
-            window.draw(this.ctx)
+
+            if(this.supportsRounded){
+                window.drawRounded(this.ctx)
+            }else{
+                window.draw(this.ctx)
+            }
         })
     }
 

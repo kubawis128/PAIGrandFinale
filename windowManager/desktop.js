@@ -8,16 +8,15 @@ export class Desktop{
     
     draw(){
         // Background
-        if(this.wallpaper == null){
-            this.renderer.fillScreen("#252525")
-        }else{
-            this.renderer.fillScreen("#252525")
+        this.renderer.fillScreen("#252525")
+        if(this.wallpaper != null){
             this.ctx.drawImage(this.wallpaper, 0, 0)
         }
         
         // Task Bar
         this.ctx.fillStyle = "#696969"
         this.ctx.fillRect(0, this.canvas.height-32, this.canvas.width, this.canvas.height)
+        
         // Task Bar Items
         let x = 86
         this.renderer.window_list.forEach((window,index) => {
@@ -68,6 +67,7 @@ export class Icon{
         this.texture = texture
         this.exec = exec
     }
+
     check_collision(x, y){
         if(this.x <= x && this.x + 64 >= x){
             if(this.y <= y && this.y + 88 >= y){

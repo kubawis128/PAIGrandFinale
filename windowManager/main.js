@@ -6,7 +6,7 @@ import {Loader} from "./assetManager.js";
 // Applications
 import {Game} from "../tetris/tetris.js"
 import {DOOM} from "../doom/doom.js";
-
+import {Calc} from "../calc/main.js";
 
 let assetLoader = new Loader();
 
@@ -17,19 +17,26 @@ let desk = new Desktop(renderer,assetLoader.assets.desktop.wallpaper)
 let icons = []
 icons.push(new Icon(100, 100, "Tetris", assetLoader.assets.icons.tetris, () => {
     let tetrisWindow = new Window(100,200, 300, 440, "Tetris.js")
+
     renderer.addWindow(tetrisWindow)
+
     new Game(tetrisWindow.canvas)
 }))
 
 icons.push(new Icon(200, 100, "DOOM", assetLoader.assets.icons.doom, () => {
     let doomWindow = new Window(100,200, 640, 400, "DOOM",renderer)
-    
-    doomWindow.canvas.setAttribute("tabindex", "0"); 
 
-    let doom_instance = new DOOM(doomWindow.canvas, doomWindow)
-    doomWindow.instance = doom_instance
+    doomWindow.instance = new DOOM(doomWindow.canvas, doomWindow)
 
     renderer.addWindow(doomWindow)
+}))
+
+icons.push(new Icon(300, 100, "Calculator", assetLoader.assets.icons.doom, () => {
+    let calcWindow = new Window(100,200, 360, 500, "Calculator",renderer)
+
+    calcWindow.instance = new Calc(calcWindow.canvas, calcWindow)
+
+    renderer.addWindow(calcWindow)
 }))
 
 document.addEventListener("mousedown", (event) => {
