@@ -9,8 +9,10 @@ export class Renderer{
             this.ctx.roundRect(0,0,0,0,4)
             this.ctx.fill()
             this.supportsRounded = true
+            console.log("The browser does support drawing rounded windows")
         }catch (error){
             this.supportsRounded = false
+            console.log("The browser does not support drawing rounded windows")
         }
         
     }
@@ -29,7 +31,7 @@ export class Renderer{
         // Call an update on them
         this.window_list.forEach(window => {
 
-            if(!this.supportsRounded){
+            if(this.supportsRounded){
                 window.drawRounded()
             }else{
                 window.draw()
@@ -44,6 +46,10 @@ export class Renderer{
                 if(window.y <= y && window.y + 88 >= y){
                     if(window.x+window.width-30 <= x && window.x + window.width - 2 >= x){
                         found = {window: window, action: "close"}
+                        return
+                    }
+                    if(window.x+window.width-60 <= x && window.x + window.width - 32 >= x){
+                        found = {window: window, action: "minimize"}
                         return
                     }
                     found = {window: window, action: "drag"}

@@ -1,6 +1,6 @@
 export class Window{
-    constructor(x,y,width,height,title,rend){
-
+    constructor(x,y,width,height,title,innerElementTag,rend){
+        console.log(innerElementTag)
         this.x = x;
         this.y = y;
 
@@ -20,16 +20,20 @@ export class Window{
         this.windowCanvas.style.top = y + "px"; 
         this.windowCanvas.id = "titlebar"
 
-        this.canvas = document.createElement("canvas")
-        document.getElementsByTagName("body")[0].appendChild(this.canvas)
-        this.canvas.width = width;
-        this.canvas.height = height;
-        this.canvas.style.left = x + "px";
-        this.canvas.style.top = y+30 + "px"; 
+        this.inner = document.createElement(innerElementTag)
+        document.getElementsByTagName("body")[0].appendChild(this.inner)
+        this.inner.width = width;
+        this.inner.height = height;
+        this.inner.style.left = x + "px";
+        this.inner.style.top = y+30 + "px"; 
 
         this.renderer = rend
 
         this.uuid = this.generatePseudoRandomUUID()
+
+        this.oldx = x
+        this.oldy = y
+        this.minimized = false
     }
     
     draw(){
@@ -89,7 +93,7 @@ export class Window{
         // Close Button and it's text
         ctx.fillStyle = "#DF2E38"
         ctx.beginPath()
-        ctx.roundRect(this.width-30, this.y+2, 26, 26,4)
+        ctx.roundRect(this.width-30, 2, 26, 26,4)
         ctx.fill()
         ctx.fillStyle = "#FFFFFF"
         ctx.fillText("X", this.width-30+(ctx.measureText("X").width/2), 24);
@@ -97,7 +101,7 @@ export class Window{
         // Minimize Button
         ctx.fillStyle = "#3E54AC"
         ctx.beginPath()
-        ctx.roundRect(this.width-60, this.y+2, 26, 26,4)
+        ctx.roundRect(this.width-60, 2, 26, 26,4)
         ctx.fill()
         ctx.fillStyle = "#FFFFFF"
         ctx.fillText("_", this.width-60+(ctx.measureText("_").width/2), 24);
@@ -116,7 +120,7 @@ export class Window{
         if(this.instance){
             this.instance.destroy()
         }
-        document.body.removeChild(this.canvas)
+        document.body.removeChild(this.inner)
         document.body.removeChild(this.windowCanvas)
     }
 
@@ -129,11 +133,7 @@ export class Window{
         this.holdingX = x
         this.holdingY = y
 
-        this.canvas.style.left = this.x + "px";
-        this.canvas.style.top = (this.y-30)+60 + "px"; 
-
-        this.windowCanvas.style.left = this.x-6 + "px";
-        this.windowCanvas.style.top = this.y + "px"; 
+        this.updatePos()
     }
 
     generatePseudoRandomUUID() {
@@ -141,5 +141,40 @@ export class Window{
             var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
             return v.toString(16);
         });
+    }
+
+    minimize(){
+        /* Send the window to brazill (offscreen) */
+        this.oldx = this.x;
+        this.oldy = this.y;
+        this.x = 3000
+        this.y = 3000 
+        this.updatePos()
+
+        this.minimized = true;
+    }
+
+    unminimize(){
+        /* Retreive the window from brazill */
+        this.x = this.oldx
+        this.y = this.oldy 
+        this.updatePos()
+
+        this.minimized = false;
+    }
+
+    switchMinimized(){
+        if(this.minimized){
+            this.unminimize()
+        }else{
+            this.minimize()
+        }
+    }
+    updatePos(){
+        this.inner.style.left = this.x + "px";
+        this.inner.style.top = (this.y-30)+60 + "px"; 
+
+        this.windowCanvas.style.left = this.x-6 + "px";
+        this.windowCanvas.style.top = this.y + "px"; 
     }
 }

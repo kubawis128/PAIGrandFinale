@@ -53,16 +53,16 @@ export class Renderer {
     }
     
     drawScore(score){
-        this.ctx.font = "24px serif";
+        this.ctx.font = "24px Minecraft";
         this.ctx.fillStyle = "#FFFFFF"
-        this.ctx.fillText("Score:\n" + score, 225, 30);
+        this.ctx.fillText("Score:", 225, 30);
         this.ctx.fillText(score, 225, 60);
     }
 
     drawGameOver(){
         this.ctx.fillStyle = "#F0000060"
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
-        this.ctx.font = "48px serif";
+        this.ctx.font = "48px Minecraft";
         this.ctx.fillStyle = "#FFFFFF"
         let textSize = this.ctx.measureText("Game Over")
         this.ctx.fillText("Game Over", (this.canvas.width/2)-textSize.width/2, this.canvas.height/2);
