@@ -35,9 +35,9 @@ export class Calc {
         }
 
     }
+
     destroy(){
         console.log("Bye  From calc")
     }
-
 
 }
