@@ -55,7 +55,7 @@ export class Renderer {
     drawScore(score){
         this.ctx.font = "24px serif";
         this.ctx.fillStyle = "#FFFFFF"
-        this.ctx.fillText("Score:\n" + score, 225, 30);
+        this.ctx.fillText("Score:\n", 225, 30);
         this.ctx.fillText(score, 225, 60);
     }
 

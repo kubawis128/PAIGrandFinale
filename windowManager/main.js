@@ -32,7 +32,7 @@ icons.push(new Icon(200, 100, "DOOM", assetLoader.assets.icons.doom, () => {
 }))
 
 icons.push(new Icon(300, 100, "Calculator", assetLoader.assets.icons.doom, () => {
-    let calcWindow = new Window(100,200, 360, 500, "Calculator",renderer)
+    let calcWindow = new Window(100,200, 360, 540, "Calculator",renderer)
 
     calcWindow.instance = new Calc(calcWindow.canvas, calcWindow)
 

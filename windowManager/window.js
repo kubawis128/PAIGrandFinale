@@ -89,7 +89,7 @@ export class Window{
         // Close Button and it's text
         ctx.fillStyle = "#DF2E38"
         ctx.beginPath()
-        ctx.roundRect(this.width-30, this.y+2, 26, 26,4)
+        ctx.roundRect(this.width-30, 2, 26, 26,4)
         ctx.fill()
         ctx.fillStyle = "#FFFFFF"
         ctx.fillText("X", this.width-30+(ctx.measureText("X").width/2), 24);
@@ -97,7 +97,7 @@ export class Window{
         // Minimize Button
         ctx.fillStyle = "#3E54AC"
         ctx.beginPath()
-        ctx.roundRect(this.width-60, this.y+2, 26, 26,4)
+        ctx.roundRect(this.width-60, 2, 26, 26,4)
         ctx.fill()
         ctx.fillStyle = "#FFFFFF"
         ctx.fillText("_", this.width-60+(ctx.measureText("_").width/2), 24);
@@ -137,7 +137,7 @@ export class Window{
     }
 
     generatePseudoRandomUUID() {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
             var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
             return v.toString(16);
         });

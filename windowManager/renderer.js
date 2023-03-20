@@ -29,7 +29,7 @@ export class Renderer{
         // Call an update on them
         this.window_list.forEach(window => {
 
-            if(!this.supportsRounded){
+            if(this.supportsRounded){
                 window.drawRounded()
             }else{
                 window.draw()
