@@ -2,15 +2,15 @@
     "background": "#3f3f3f",
     "elements": {
         "List": {
-            "width":"fullW",
-            "height":"fullH",
+            "width":"{fullW}",
+            "height":"{fullH}",
             "elements": {
                 "0": {
                     "Image": {
                         "src": "musicPlayer.glamour",
-                        "width": "fullW/3",
-                        "height": "fullW/3",
-                        "x": "fullW/3",
+                        "width": "{fullW}/3",
+                        "height": "{fullW}/3",
+                        "x": "{fullW}/3",
                         "rounded": "5"
                     }
                 },

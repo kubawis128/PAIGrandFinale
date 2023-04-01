@@ -1,8 +1,10 @@
+import { WGM } from "../windowManager/WGM/WGM.js";
 export class MusicPlayer {
     constructor(canvas, assetManager){
         this.canvas = canvas
         this.ctx = this.canvas.getContext("2d")
         this.assetManager = assetManager
+        this.WGM = new WGM(this.assetManager.assets.musicPlayer.layout)
     }
 
     draw(){
