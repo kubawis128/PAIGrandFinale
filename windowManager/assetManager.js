@@ -5,10 +5,14 @@ export class Loader{
             icons: {
                 doom: "doom.png",
                 tetris: "tetris.png",
+                music: "music.png",
             },
             desktop: {
                 wallpaper: "wallpaper.png",
-            }
+            },
+            musicPlayer: {
+                glamour: "glamour.png",
+            },
         }
         this.assets = {} 
         this.addToList(this.assets,assets,"/assets/")

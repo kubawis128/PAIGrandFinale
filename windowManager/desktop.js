@@ -11,7 +11,7 @@ export class Desktop{
         // Background
         this.renderer.fillScreen("#252525")
         if(this.wallpaper != null){
-            this.ctx.drawImage(this.wallpaper, 0, 0)
+            this.ctx.drawImage(this.wallpaper, 0, 0,)
         }
         
         // Task Bar
@@ -54,7 +54,7 @@ export class Desktop{
     drawIcons(icons){
         this.ctx.font = "24px Minecraft";
         icons.forEach(icon => {
-            this.ctx.drawImage(icon.texture, icon.x, icon.y)
+            this.ctx.drawImage(icon.texture, icon.x, icon.y,64,64)
             this.ctx.fillStyle = "#FFFFFF"
             this.ctx.fillText(icon.name, icon.x + ((64 - this.ctx.measureText(icon.name).width)/2), icon.y+88);
         });

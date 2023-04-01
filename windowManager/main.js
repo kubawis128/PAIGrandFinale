@@ -15,7 +15,7 @@ let assetLoader = new Loader();
 let renderer = new Renderer(document.getElementById("screen"))
 
 let desk = new Desktop(renderer,assetLoader.assets.desktop.wallpaper)
-
+console.log(assetLoader)
 let icons = []
 icons.push(new Icon(100, 100, "Tetris", assetLoader.assets.icons.tetris, () => {
     let tetrisWindow = new Window(100,200, 300, 440, "Tetris.js", "canvas")
@@ -41,10 +41,10 @@ icons.push(new Icon(300, 100, "Calculator", assetLoader.assets.icons.doom, () =>
     renderer.addWindow(calcWindow)
 }))
 
-icons.push(new Icon(400, 100, "Music Player", assetLoader.assets.icons.doom, () => {
-    let calcWindow = new Window(100,300, 400, 480, "Music Player","canvas",renderer)
+icons.push(new Icon(400, 100, "Music Player", assetLoader.assets.icons.music, () => {
+    let calcWindow = new Window(100,300, 400, 275, "Music Player","canvas",renderer)
 
-    calcWindow.instance = new MusicPlayer(calcWindow.inner)
+    calcWindow.instance = new MusicPlayer(calcWindow.inner,assetLoader)
 
     renderer.addWindow(calcWindow)
 }))
@@ -86,7 +86,14 @@ document.addEventListener("mousedown", (event) => {
             dragged_window = clicked.window
             dragged_window.setHolding(event.clientX, event.clientY)
         }
-        
+    }else {
+
+        let clicked_window = renderer.window_list.find((value) => {
+            return value.uuid == event.target.id 
+        })
+
+        console.log("Clicked Window:", clicked_window)
+        clicked_window.handleClick(event.clientX, event.clientY)
     }
 })
 

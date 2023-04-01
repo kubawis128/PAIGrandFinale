@@ -1,4 +1,5 @@
 export class Window{
+
     constructor(x,y,width,height,title,innerElementTag,rend){
         console.log(innerElementTag)
         this.x = x;
@@ -7,10 +8,13 @@ export class Window{
         this.width = width;
         this.height = height;
 
+        this.uuid = this.generatePseudoRandomUUID()
+
+        this.title = title;
+        
         this.holdingX = x
         this.holdingY = y
 
-        this.title = title;
 
         this.windowCanvas = document.createElement("canvas")
         document.getElementsByTagName("body")[0].appendChild(this.windowCanvas)
@@ -21,6 +25,7 @@ export class Window{
         this.windowCanvas.id = "titlebar"
 
         this.inner = document.createElement(innerElementTag)
+        this.inner.id = this.uuid
         document.getElementsByTagName("body")[0].appendChild(this.inner)
         this.inner.width = width;
         this.inner.height = height;
@@ -29,11 +34,10 @@ export class Window{
 
         this.renderer = rend
 
-        this.uuid = this.generatePseudoRandomUUID()
-
         this.oldx = x
         this.oldy = y
         this.minimized = false
+
     }
     
     draw(){
@@ -137,7 +141,7 @@ export class Window{
     }
 
     generatePseudoRandomUUID() {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
             var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
             return v.toString(16);
         });
@@ -176,5 +180,13 @@ export class Window{
 
         this.windowCanvas.style.left = this.x-6 + "px";
         this.windowCanvas.style.top = this.y + "px"; 
+    }
+
+    handleClick(x,y){
+        if(this.instance && this.instance.handleClick){
+            if(x - this.x && y - this.y - 32){
+                this.instance.handleClick(x - this.x,y - this.y - 32)
+            }
+        }
     }
 }
