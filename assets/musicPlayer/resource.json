@@ -1,0 +1,80 @@
+{
+    "background": "#3f3f3f",
+    "elements": {
+        "List": {
+            "width":"fullW",
+            "height":"fullH",
+            "elements": {
+                "0": {
+                    "Image": {
+                        "src": "musicPlayer.glamour",
+                        "width": "fullW/3",
+                        "height": "fullW/3",
+                        "x": "fullW/3",
+                        "rounded": "5"
+                    }
+                },
+                "1": {
+                    "Text": {
+                        "content": "Death By Glamour",
+                        "font": "32px Minecraft",
+                        "align": "center"
+                    }
+                },
+                "2": {
+                    "Text": {
+                        "content": "1:11/3:13",
+                        "font": "16px Minecraft",
+                        "align": "center"
+                    }
+                },
+                "3": {
+                    "Grid": {
+                        "elements":{
+                            "0": {
+                                "Button": {
+                                    "content": "arrow_back",
+                                    "font": "32px Material Symbols Outlined",
+                                    "align": "center",
+                                    "id": "back"
+                                }
+                            },
+                            "1": {
+                                "Button": {
+                                    "content": "chevron_left",
+                                    "font": "32px Material Symbols Outlined",
+                                    "align": "center",
+                                    "id": "rewind"
+                                }
+                            },
+                            "2": {
+                                "Button": {
+                                    "content": "pause",
+                                    "font": "32px Material Symbols Outlined",
+                                    "align": "center",
+                                    "id": "play"
+                                }
+                            },
+                            "3": {
+                                "Button": {
+                                    "content": "chevron_right",
+                                    "font": "32px Material Symbols Outlined",
+                                    "align": "center",
+                                    "id": "fastforward"
+                                }
+                            },
+                            "4": {
+                                "Button": {
+                                    "content": "arrow_forward",
+                                    "font": "32px Material Symbols Outlined",
+                                    "align": "center",
+                                    "id": "next"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

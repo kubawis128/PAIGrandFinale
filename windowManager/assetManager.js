@@ -10,7 +10,7 @@ export class Loader{
             desktop: {
                 wallpaper: "wallpaper.png",
             },
-            music: {
+            musicPlayer: {
                 glamour: "glamour.png",
             },
         }

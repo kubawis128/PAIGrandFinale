@@ -19,7 +19,7 @@ export class MusicPlayer {
         this.ctx.closePath()
         this.ctx.save()
         this.ctx.clip();
-        this.ctx.drawImage(this.assetManager.assets.music.glamour ,this.canvas.width/3, yOffset, this.canvas.width/3,this.canvas.width/3)
+        this.ctx.drawImage(this.assetManager.assets.musicPlayer.glamour ,this.canvas.width/3, yOffset, this.canvas.width/3,this.canvas.width/3)
         this.ctx.restore();
 
         yOffset += this.canvas.width/3
