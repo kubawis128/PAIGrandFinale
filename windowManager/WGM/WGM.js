@@ -2,12 +2,17 @@ import {Elements} from "./ElementType.js"
 
 export class WGM {
     
-    constructor(guiResourceFile) {
+    constructor(guiResourceFile,canvas) {
+        this.canvas = canvas
+        this.ctx = this.canvas.getContext("2d")
+
         this.layout = JSON.parse(guiResourceFile)
-        let rootElements = []
+
+        this.rootElements = []
         for(var key in this.layout.elements){
             let currentElement = this.layout.elements[key]
             let element = new Elements[key]
+            element.ctx = this.ctx
             for(var elementKeys in currentElement){
                 element[elementKeys] = currentElement[elementKeys]
                 if(element.isEnumerable){
@@ -15,16 +20,20 @@ export class WGM {
                     element.parseChildren(element)
                 }
             }
-            rootElements.push(element)
+            if(element.afterInit){
+                element.afterInit()
+            }
+            element.updatePlaceHolders()
+            this.rootElements.push(element)
         }
-        console.log(rootElements)
-        rootElements.forEach(element => {
-            element.draw()
-        })
     }
 
-    draw(canvas) {
-        console.log(this.layout.elements)
+    draw() {
+        this.ctx.fillStyle = this.layout.background
+        this.ctx.fillRect(0,0,this.canvas.clientWidth,this.canvas.clientHeight)
+        this.rootElements.forEach(element => {
+            element.draw(this.ctx)
+        })
     }
 
 }

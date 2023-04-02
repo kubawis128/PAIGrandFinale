@@ -9,6 +9,7 @@ import {DOOM} from "../doom/doom.js";
 import {Calc} from "../calc/main.js";
 
 import {MusicPlayer} from "../musicPlayer/main.js";
+import {MusicPlayerWGM} from "../musicPlayer-WGM/main.js";
 
 let assetLoader = new Loader();
 
@@ -49,6 +50,13 @@ icons.push(new Icon(400, 100, "Music Player", assetLoader.assets.icons.music, ()
     renderer.addWindow(calcWindow)
 }))
 
+icons.push(new Icon(500, 100, "Music Player WGM", assetLoader.assets.icons.music, () => {
+    let calcWindow = new Window(100,300, 400, 275, "Music Player WGM","canvas",renderer)
+
+    calcWindow.instance = new MusicPlayerWGM(calcWindow.inner,assetLoader)
+
+    renderer.addWindow(calcWindow)
+}))
 document.addEventListener("mousedown", (event) => {
     //console.log(event)
     if(event.target.id == "screen" || event.target.id == "titlebar"){

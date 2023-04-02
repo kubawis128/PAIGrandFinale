@@ -1,11 +1,15 @@
-export class MusicPlayer {
+import { WGM } from "../windowManager/WGM/WGM.js";
+export class MusicPlayerWGM {
     constructor(canvas, assetManager){
         this.canvas = canvas
-        this.ctx = this.canvas.getContext("2d")
         this.assetManager = assetManager
+        this.WGM = new WGM(this.assetManager.assets.musicPlayer.layout,this.canvas)
     }
-    
+
     draw(){
+        this.WGM.draw()
+    }
+    /*draw(){
 
         let yOffset = 0;
         // Background
@@ -47,11 +51,11 @@ export class MusicPlayer {
         })
         this.buttonLocationY = yOffset
     }
-
+*/
     destroy(){
         console.log("Bye  From Musish")
     }
-
+/*
     roundRect(ctx,x,y,width,height,round){
         ctx.beginPath()
         ctx.roundRect(x,y,width,height,round)
@@ -65,5 +69,5 @@ export class MusicPlayer {
                 console.log("Clicked button ", index)
             }
         }
-    }
+    }*/
 }
