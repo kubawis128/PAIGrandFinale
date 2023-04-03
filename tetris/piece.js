@@ -24,7 +24,7 @@ export class Piece{
         let xOffset = 1
         let yOffset = 1
 
-        this.points.split('').forEach((element) => {
+        this.points.split("").forEach((element) => {
             if(element == "n"){
                 yOffset = 1
                 xOffset += 1

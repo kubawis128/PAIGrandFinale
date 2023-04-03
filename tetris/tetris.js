@@ -5,11 +5,11 @@ import {Grid} from "./grid.js"
 //import {Debug} from "./debug.js"
 
 const state = {
-    Menu: 'Menu',
-    Pause: 'Pause',
-    Loop: 'Loop',
-    GameOver: 'GameOver'
-  };
+    Menu: "Menu",
+    Pause: "Pause",
+    Loop: "Loop",
+    GameOver: "GameOver"
+}
 
 export class Game {
 
@@ -28,31 +28,31 @@ export class Game {
                 return
             }
             switch(e.key){
-                case "a":
-                    if(!this.checkCollisionsMove().includes("L")){
-                        this.playingPiece.x -= 1
-                        this.update()
-                    }
+            case "a":
+                if(!this.checkCollisionsMove().includes("L")){
+                    this.playingPiece.x -= 1
                     this.update()
-                    break
-                case "d":
-                    if(!this.checkCollisionsMove().includes("R")){
-                        this.playingPiece.x += 1
-                        this.update()
-                    }
-                    break
-                case "e":
-                    this.playingPiece.rotateClock()
+                }
+                this.update()
+                break
+            case "d":
+                if(!this.checkCollisionsMove().includes("R")){
+                    this.playingPiece.x += 1
                     this.update()
-                    break
-                case "q":
-                    this.playingPiece.rotateClock()
-                    this.playingPiece.rotateClock()
-                    this.playingPiece.rotateClock()
-                    this.update()
-                    break
-                case " ":
-                    this.gravity()
+                }
+                break
+            case "e":
+                this.playingPiece.rotateClock()
+                this.update()
+                break
+            case "q":
+                this.playingPiece.rotateClock()
+                this.playingPiece.rotateClock()
+                this.playingPiece.rotateClock()
+                this.update()
+                break
+            case " ":
+                this.gravity()
                 break
             }
         })
@@ -72,8 +72,8 @@ export class Game {
 
     checkGameOver(){
         let collide = false
-        this.playingPiece.piece.collisions().forEach((row, rowIndex) => {
-            row.forEach((col, colIndex) => {
+        this.playingPiece.piece.collisions().forEach(row => {
+            row.forEach(col => {
                 if(col != null){
                     if(this.grid.get_cell(0, this.playingPiece.x) != null){
                         collide = true
@@ -145,18 +145,18 @@ export class Game {
         }
         if(this.checkLines().length != 0){
             switch (this.checkLines().length){
-                case 1:
-                    this.score += 40
-                    break
-                case 2:
-                    this.score += 100
-                    break
-                case 3:
-                    this.score += 300
-                    break
-                case 4:
-                    this.score += 1200
-                    break
+            case 1:
+                this.score += 40
+                break
+            case 2:
+                this.score += 100
+                break
+            case 3:
+                this.score += 300
+                break
+            case 4:
+                this.score += 1200
+                break
             }
             this.checkLines().forEach((line) => {
                 this.grid.grid.splice(line,1)

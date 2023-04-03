@@ -1,0 +1,8 @@
+{
+  "name": "paigrandfinale",
+  "version": "1.0.0",
+  "description": "Final *Big* Project for PAI lessons",
+  "dependencies": {
+    "eslint": "^8.37.0"
+  }
+}

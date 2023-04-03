@@ -1,17 +1,17 @@
-import {Renderer} from "./renderer.js";
-import {Window} from "./window.js";
-import {Desktop, Icon} from "./desktop.js";
-import {Loader} from "./assetManager.js";
+import {Renderer} from "./renderer.js"
+import {Window} from "./window.js"
+import {Desktop, Icon} from "./desktop.js"
+import {Loader} from "./assetManager.js"
 
 // Applications
 import {Game} from "../tetris/tetris.js"
-import {DOOM} from "../doom/doom.js";
-import {Calc} from "../calc/main.js";
+import {DOOM} from "../doom/doom.js"
+import {Calc} from "../calc/main.js"
 
-import {MusicPlayer} from "../musicPlayer/main.js";
-import {MusicPlayerWGM} from "../musicPlayer-WGM/main.js";
+import {MusicPlayer} from "../musicPlayer/main.js"
+import {MusicPlayerWGM} from "../musicPlayer-WGM/main.js"
 
-let assetLoader = new Loader();
+let assetLoader = new Loader()
 
 let renderer = new Renderer(document.getElementById("screen"))
 
@@ -125,7 +125,7 @@ document.addEventListener("mouseup", (event) => {
 
 setInterval(function (){
     update()
-  }, 16);
+}, 16)
 
 function update(){
     desk.draw()

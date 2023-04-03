@@ -23,7 +23,7 @@ export class Grid {
         let xOffset = 0
         let yOffset = 0
         
-        piece.points.split('').forEach((element) => {
+        piece.points.split("").forEach((element) => {
             
             if(element == "n"){
                 yOffset = 0
@@ -31,7 +31,7 @@ export class Grid {
             }else{
                 if(element == "x"){
                     if(y+yOffset >= 0){
-                     this.grid[y+yOffset][x+xOffset] = piece
+                        this.grid[y+yOffset][x+xOffset] = piece
                     }
                     yOffset += 1
                 }else if(element == "-"){

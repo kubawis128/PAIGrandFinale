@@ -7,7 +7,7 @@ export class MusicPlayer {
     
     draw(){
 
-        let yOffset = 0;
+        let yOffset = 0
         // Background
         this.ctx.fillStyle = "#3f3f3f"
         
@@ -18,32 +18,32 @@ export class MusicPlayer {
         this.ctx.roundRect(this.canvas.width/3, yOffset, this.canvas.width/3,this.canvas.width/3,5) 
         this.ctx.closePath()
         this.ctx.save()
-        this.ctx.clip();
+        this.ctx.clip()
         this.ctx.drawImage(this.assetManager.assets.musicPlayer.glamour ,this.canvas.width/3, yOffset, this.canvas.width/3,this.canvas.width/3)
-        this.ctx.restore();
+        this.ctx.restore()
 
         yOffset += this.canvas.width/3
-        this.ctx.font = "32px Minecraft";
+        this.ctx.font = "32px Minecraft"
         this.ctx.fillStyle = "#FFFFFF"
         let textSize = this.ctx.measureText("Death By Glamour")
         yOffset += 32
-        this.ctx.fillText("Death By Glamour", (this.canvas.width/2)-textSize.width/2, yOffset);
+        this.ctx.fillText("Death By Glamour", (this.canvas.width/2)-textSize.width/2, yOffset)
 
-        this.ctx.font = "16px Minecraft";
+        this.ctx.font = "16px Minecraft"
         textSize = this.ctx.measureText("1:11/3:13")
         yOffset += 6 + 16
-        this.ctx.fillText("1:11/3:13", (this.canvas.width/2)-textSize.width/2, yOffset);
+        this.ctx.fillText("1:11/3:13", (this.canvas.width/2)-textSize.width/2, yOffset)
         yOffset += 8
 
         let icons = ["arrow_back", "chevron_left", "pause" , "chevron_right" , "arrow_forward"]
         
-        this.ctx.font = "32px Material Symbols Outlined";
+        this.ctx.font = "32px Material Symbols Outlined"
         icons.forEach((icon,index) => {
             this.ctx.fillStyle = "#3f3f3f"
             let x = (this.canvas.width/8 * (index+1)) + Math.abs(((this.canvas.width/8)*6) / (icons.length - this.canvas.width/8)) * (index+1)
             this.roundRect(this.ctx, x, yOffset, this.canvas.width/8,this.canvas.width/8,32)
             this.ctx.fillStyle = "#FFFFFF"
-            this.ctx.fillText(icon, x + this.ctx.measureText(icon).width/4, yOffset + 32 + 8);
+            this.ctx.fillText(icon, x + this.ctx.measureText(icon).width/4, yOffset + 32 + 8)
         })
         this.buttonLocationY = yOffset
     }

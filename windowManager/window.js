@@ -2,15 +2,15 @@ export class Window{
 
     constructor(x,y,width,height,title,innerElementTag,rend){
         console.log(innerElementTag)
-        this.x = x;
-        this.y = y;
+        this.x = x
+        this.y = y
 
-        this.width = width;
-        this.height = height;
+        this.width = width
+        this.height = height
 
         this.uuid = this.generatePseudoRandomUUID()
 
-        this.title = title;
+        this.title = title
         
         this.holdingX = x
         this.holdingY = y
@@ -18,19 +18,19 @@ export class Window{
 
         this.windowCanvas = document.createElement("canvas")
         document.getElementsByTagName("body")[0].appendChild(this.windowCanvas)
-        this.windowCanvas.width = width+12;
-        this.windowCanvas.height = height+34;
-        this.windowCanvas.style.left = x-6 + "px";
-        this.windowCanvas.style.top = y + "px"; 
+        this.windowCanvas.width = width+12
+        this.windowCanvas.height = height+34
+        this.windowCanvas.style.left = x-6 + "px"
+        this.windowCanvas.style.top = y + "px" 
         this.windowCanvas.id = "titlebar"
 
         this.inner = document.createElement(innerElementTag)
         this.inner.id = this.uuid
         document.getElementsByTagName("body")[0].appendChild(this.inner)
-        this.inner.width = width;
-        this.inner.height = height;
-        this.inner.style.left = x + "px";
-        this.inner.style.top = y+30 + "px"; 
+        this.inner.width = width
+        this.inner.height = height
+        this.inner.style.left = x + "px"
+        this.inner.style.top = y+30 + "px" 
 
         this.renderer = rend
 
@@ -51,21 +51,21 @@ export class Window{
         ctx.fillRect(3, 0, this.width+6, 30)
 
         // Window Title
-        ctx.font = "24px Minecraft";
+        ctx.font = "24px Minecraft"
         ctx.fillStyle = "#FFFFFF"
-        ctx.fillText(this.title, (this.width/2)-(ctx.measureText(this.title).width/2), 24);
+        ctx.fillText(this.title, (this.width/2)-(ctx.measureText(this.title).width/2), 24)
 
         // Close Button and it's text
         ctx.fillStyle = "#DF2E38"
         ctx.fillRect(this.width-30, 2, 26, 26)
         ctx.fillStyle = "#FFFFFF"
-        ctx.fillText("X", this.width-30+(ctx.measureText("X").width/2), 24);
+        ctx.fillText("X", this.width-30+(ctx.measureText("X").width/2), 24)
 
         // Minimize Button
         ctx.fillStyle = "#3E54AC"
         ctx.fillRect(this.width-60, 2, 26, 26)
         ctx.fillStyle = "#FFFFFF"
-        ctx.fillText("_", this.width-60+(ctx.measureText("_").width/2), 24);
+        ctx.fillText("_", this.width-60+(ctx.measureText("_").width/2), 24)
         if(this.instance){
             if(this.instance.draw){
                 this.instance.draw()
@@ -90,9 +90,9 @@ export class Window{
         ctx.fill()
 
         // Window Title
-        ctx.font = "24px Minecraft";
+        ctx.font = "24px Minecraft"
         ctx.fillStyle = "#FFFFFF"
-        ctx.fillText(this.title, (this.width/2)-(ctx.measureText(this.title).width/2), 24);
+        ctx.fillText(this.title, (this.width/2)-(ctx.measureText(this.title).width/2), 24)
 
         // Close Button and it's text
         ctx.fillStyle = "#DF2E38"
@@ -100,7 +100,7 @@ export class Window{
         ctx.roundRect(this.width-30, 2, 26, 26,4)
         ctx.fill()
         ctx.fillStyle = "#FFFFFF"
-        ctx.fillText("X", this.width-30+(ctx.measureText("X").width/2), 24);
+        ctx.fillText("X", this.width-30+(ctx.measureText("X").width/2), 24)
 
         // Minimize Button
         ctx.fillStyle = "#3E54AC"
@@ -108,7 +108,7 @@ export class Window{
         ctx.roundRect(this.width-60, 2, 26, 26,4)
         ctx.fill()
         ctx.fillStyle = "#FFFFFF"
-        ctx.fillText("_", this.width-60+(ctx.measureText("_").width/2), 24);
+        ctx.fillText("_", this.width-60+(ctx.measureText("_").width/2), 24)
         if(this.instance){
             if(this.instance.draw){
                 this.instance.draw()
@@ -141,21 +141,21 @@ export class Window{
     }
 
     generatePseudoRandomUUID() {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-            var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
-            return v.toString(16);
-        });
+        return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
+            var r = Math.random()*16|0, v = c == "x" ? r : (r&0x3|0x8)
+            return v.toString(16)
+        })
     }
 
     minimize(){
         /* Send the window to brazill (offscreen) */
-        this.oldx = this.x;
-        this.oldy = this.y;
+        this.oldx = this.x
+        this.oldy = this.y
         this.x = 3000
         this.y = 3000 
         this.updatePos()
 
-        this.minimized = true;
+        this.minimized = true
     }
 
     unminimize(){
@@ -164,7 +164,7 @@ export class Window{
         this.y = this.oldy 
         this.updatePos()
 
-        this.minimized = false;
+        this.minimized = false
     }
 
     switchMinimized(){
@@ -175,11 +175,11 @@ export class Window{
         }
     }
     updatePos(){
-        this.inner.style.left = this.x + "px";
-        this.inner.style.top = (this.y-30)+60 + "px"; 
+        this.inner.style.left = this.x + "px"
+        this.inner.style.top = (this.y-30)+60 + "px" 
 
-        this.windowCanvas.style.left = this.x-6 + "px";
-        this.windowCanvas.style.top = this.y + "px"; 
+        this.windowCanvas.style.left = this.x-6 + "px"
+        this.windowCanvas.style.top = this.y + "px" 
     }
 
     handleClick(x,y){

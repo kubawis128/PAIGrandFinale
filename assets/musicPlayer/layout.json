@@ -3,7 +3,6 @@
     "elements": {
         "List": {
             "width":"{fullW}",
-            "height":"{fullH}",
             "elements": {
                 "0": {
                     "Image": {
@@ -25,7 +24,7 @@
                 },
                 "2": {
                     "Text": {
-                        "content": "1:11/3:13",
+                        "content": "x:xx/x:xx",
                         "font": "16px Minecraft",
                         "align": "center",
                         "padding": 10

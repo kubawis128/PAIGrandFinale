@@ -14,7 +14,7 @@ export class playingPiece {
         let xOffset = 0
         let yOffset = 0
 
-        this.piece.points.split('').forEach((element) => {
+        this.piece.points.split("").forEach((element) => {
             if(element == "n"){
                 yOffset = 0
                 xOffset += 1

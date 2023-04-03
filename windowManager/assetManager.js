@@ -26,22 +26,23 @@ export class Loader{
                 this.addToList(toSave[key],items[key],path + key + "/" )
             }else{
                 console.log("add to object", items[key])
-                let file = null;
+                let file = null
                 switch (items[key].split(".").at(-1)){
-                    case "jpg":
-                    case "png":
-                    case "jpeg":
-                        file = new Image()
-                        file.src = path + items[key];
-                        file.onload = (loaded) => {
-                            let loaded_img = loaded.target
-                            loaded_img.width = loaded_img.naturalWidth
-                            loaded_img.height = loaded_img.naturalHeight
-                        }
+                case "jpg":
+                case "png":
+                case "jpeg":
+                    file = new Image()
+                    file.src = path + items[key]
+                    file.onload = (loaded) => {
+                        let loaded_img = loaded.target
+                        loaded_img.width = loaded_img.naturalWidth
+                        loaded_img.height = loaded_img.naturalHeight
+                    }
                     break
-                    case "json":
-                        const request = await fetch(path + items[key])
-                        file = await request.text()
+                case "json":
+                    // eslint-disable-next-line no-case-declarations
+                    let request = await fetch(path + items[key])
+                    file = await request.text()
                     break
                 }
 

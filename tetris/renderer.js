@@ -15,10 +15,10 @@ export class Renderer {
                     this.ctx.fillStyle = grid.get_cell(indexRow,indexCol).color
                 }else{
                     this.ctx.fillStyle = "#414348"
-                }5==3
+                }
                 this.ctx.fillRect((indexCol * 22)+1, (indexRow * 22)+1, 20, 20)
             })
-        }); 
+        }) 
     }
 
     drawNext(pieces){
@@ -26,7 +26,7 @@ export class Renderer {
             let tempGrid = [[null,null],[null,null],[null,null],[null,null]] // TODO: Stupid Change Me later 
             let xOffset = 0
             let yOffset = 0
-            piece.points.split('').forEach((element) => {
+            piece.points.split("").forEach((element) => {
                 if(element == "n"){
                     yOffset = 0
                     xOffset += 1
@@ -48,23 +48,23 @@ export class Renderer {
                     }
                     this.ctx.fillRect((indexCol * 22)+240, (indexRow * 22)+100+(pieceIndex*100), 20, 20)
                 })
-            });
+            })
         })
     }
     
     drawScore(score){
-        this.ctx.font = "24px Minecraft";
+        this.ctx.font = "24px Minecraft"
         this.ctx.fillStyle = "#FFFFFF"
-        this.ctx.fillText("Score:", 225, 30);
-        this.ctx.fillText(score, 225, 60);
+        this.ctx.fillText("Score:", 225, 30)
+        this.ctx.fillText(score, 225, 60)
     }
 
     drawGameOver(){
         this.ctx.fillStyle = "#F0000060"
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
-        this.ctx.font = "48px Minecraft";
+        this.ctx.font = "48px Minecraft"
         this.ctx.fillStyle = "#FFFFFF"
         let textSize = this.ctx.measureText("Game Over")
-        this.ctx.fillText("Game Over", (this.canvas.width/2)-textSize.width/2, this.canvas.height/2);
+        this.ctx.fillText("Game Over", (this.canvas.width/2)-textSize.width/2, this.canvas.height/2)
     }
 }

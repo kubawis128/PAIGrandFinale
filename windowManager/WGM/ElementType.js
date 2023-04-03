@@ -1,17 +1,18 @@
 export class Element {
-    width
-    height
+    width = 0
+    height = 0
     type
     isEnumerable = false
+    id = ""
+    y = 0
+    x = 0
+    padding = 0
+    rounded = 0
     constructor(width,height,type,ctx){
         this.ctx = ctx
         this.width = width
         this.height = height
         this.type = type
-        this.y = 0
-        this.x = 0
-        this.padding = 0
-        this.rounded = 0
     }
 
     updatePlaceHolders(){
@@ -20,6 +21,10 @@ export class Element {
         if(this.x){
             this.x = eval(replacePlaceholders(this.ctx, this.x))
         }
+    }
+
+    getWidth(){
+        return this.width
     }
 
     getHeight(){
@@ -53,7 +58,6 @@ class Enumerable extends Element {
                 }
                 element1.updatePlaceHolders()
                 newList.push(element1)
-                //console.log(newList)
             }
             element.elements = newList
         }
@@ -131,8 +135,8 @@ export class Image extends Element {
 
     afterInit(){
         console.warn("Image after init")
-        this.imageFile = document.createElement('img')
-        this.imageFile.src = "/assets/" + this.src;
+        this.imageFile = document.createElement("img")
+        this.imageFile.src = "/assets/" + this.src
         this.imageFile.onload = (loaded) => {
             let loaded_img = loaded.target
             loaded_img.width = loaded_img.naturalWidth
@@ -146,9 +150,9 @@ export class Image extends Element {
         ctx.roundRect(this.x,this.y,this.width,this.height,this.rounded) 
         ctx.closePath()
         ctx.save()
-        ctx.clip();
+        ctx.clip()
         ctx.drawImage(this.imageFile ,this.x,this.y,this.width,this.height)
-        ctx.restore();
+        ctx.restore()
     }
 }
 
@@ -163,23 +167,23 @@ export class Text extends Element {
     }
 
     draw(ctx){
-        ctx.font = this.font;
+        ctx.font = this.font
         if(this.color){
-            ctx.fillStyle = this.color;
+            ctx.fillStyle = this.color
         }else{
-            ctx.fillStyle = "#ffffff";
+            ctx.fillStyle = "#ffffff"
         }
         switch (this.align) {
-            case "center":
-                console.log("Centered text")
-                ctx.fillText(this.content, (ctx.canvas.clientWidth - (ctx.measureText(this.content).width))/2,this.y + this.fontSize);
-                break
-            case "rightAlign":
-                console.log("Centered text")
-                ctx.fillText(this.content, (ctx.canvas.clientWidth - (ctx.measureText(this.content).width)),this.y + this.fontSize);
-                break
-            default:
-                ctx.fillText(this.content, this.x,this.y + this.fontSize);
+        case "center":
+            console.log("Centered text")
+            ctx.fillText(this.content, (ctx.canvas.clientWidth - (ctx.measureText(this.content).width))/2,this.y + this.fontSize)
+            break
+        case "rightAlign":
+            console.log("Centered text")
+            ctx.fillText(this.content, (ctx.canvas.clientWidth - (ctx.measureText(this.content).width)),this.y + this.fontSize)
+            break
+        default:
+            ctx.fillText(this.content, this.x,this.y + this.fontSize)
         }
         
     }
@@ -197,9 +201,9 @@ export class Button extends Element {
 
     draw(ctx){
         if(this.color){
-            ctx.fillStyle = this.color;
+            ctx.fillStyle = this.color
         }else{
-            ctx.fillStyle = "#ffffff";
+            ctx.fillStyle = "#ffffff"
         }
 
         ctx.beginPath()
@@ -207,9 +211,9 @@ export class Button extends Element {
         ctx.fill()
 
         if(this.fontColor){
-            ctx.fillStyle = this.fontColor;
+            ctx.fillStyle = this.fontColor
         }else{
-            ctx.fillStyle = "#000000";
+            ctx.fillStyle = "#000000"
         }
         ctx.font = this.font
         ctx.fillText(this.content,this.x + (this.padding/2) + (this.innerPadding/2) ,this.y + this.fontSize + (this.innerPadding /2 ))
@@ -246,4 +250,4 @@ const Elements = {
     "Grid": Grid,
     "Button": Button,
 }
-export { Elements };
+export { Elements }

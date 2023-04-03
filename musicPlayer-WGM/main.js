@@ -1,4 +1,4 @@
-import { WGM } from "../windowManager/WGM/WGM.js";
+import { WGM } from "../windowManager/WGM/WGM.js"
 export class MusicPlayerWGM {
     constructor(canvas, assetManager){
         this.canvas = canvas

@@ -20,12 +20,12 @@ export class Desktop{
         
         // Task Bar Items
         let x = 86
-        this.renderer.window_list.forEach((window,index) => {
+        this.renderer.window_list.forEach((window) => {
             this.ctx.fillStyle = "#252525"
             this.ctx.fillRect(x-2, this.canvas.height-28, this.ctx.measureText(window.title).width+4, 24)
-            this.ctx.font = "24px Minecraft";
+            this.ctx.font = "24px Minecraft"
             this.ctx.fillStyle = "#FFFFFF"
-            this.ctx.fillText(window.title, x, this.canvas.height-28+22);
+            this.ctx.fillText(window.title, x, this.canvas.height-28+22)
             x += this.ctx.measureText(window.title).width + 8
         })
 
@@ -35,29 +35,29 @@ export class Desktop{
         this.ctx.fillRect(4, this.canvas.height-28, 78, 24)
 
         // Start button Text
-        this.ctx.font = "24px Minecraft";
+        this.ctx.font = "24px Minecraft"
         this.ctx.fillStyle = "#FFFFFF"
-        this.ctx.fillText("Start", 12, this.canvas.height-28+22);
+        this.ctx.fillText("Start", 12, this.canvas.height-28+22)
 
         // Clock
         let date = new Date()
-        var options = {hour: '2-digit',minute: '2-digit', second: '2-digit'}
-        const dateTimeFormat = new Intl.DateTimeFormat('pl-PL', options);
+        var options = {hour: "2-digit",minute: "2-digit", second: "2-digit"}
+        const dateTimeFormat = new Intl.DateTimeFormat("pl-PL", options)
 
         let date_str = ""
         dateTimeFormat.formatToParts(date).forEach(e => {date_str += e.value})
-        this.ctx.font = "24px Minecraft";
+        this.ctx.font = "24px Minecraft"
         this.ctx.fillStyle = "#FFFFFF"
-        this.ctx.fillText(date_str, this.canvas.width-(this.ctx.measureText(date_str).width), this.canvas.height-28+22);
+        this.ctx.fillText(date_str, this.canvas.width-(this.ctx.measureText(date_str).width), this.canvas.height-28+22)
     }
 
     drawIcons(icons){
-        this.ctx.font = "24px Minecraft";
+        this.ctx.font = "24px Minecraft"
         icons.forEach(icon => {
             this.ctx.drawImage(icon.texture, icon.x, icon.y,64,64)
             this.ctx.fillStyle = "#FFFFFF"
-            this.ctx.fillText(icon.name, icon.x + ((64 - this.ctx.measureText(icon.name).width)/2), icon.y+88);
-        });
+            this.ctx.fillText(icon.name, icon.x + ((64 - this.ctx.measureText(icon.name).width)/2), icon.y+88)
+        })
     }
 }
 export class Icon{
