@@ -12,6 +12,7 @@ export class Loader{
             },
             musicPlayer: {
                 glamour: "glamour.png",
+                glamourAudio: "glamour.mp3",
                 layout: "layout.json",
             },
         }
@@ -43,6 +44,12 @@ export class Loader{
                     // eslint-disable-next-line no-case-declarations
                     let request = await fetch(path + items[key])
                     file = await request.text()
+                    break
+                case "mp3":
+                    // eslint-disable-next-line no-case-declarations
+                    let audiorequest = await fetch(path + items[key])
+                    file = await audiorequest.arrayBuffer()
+                    console.log("Audio file:",typeof(file))
                     break
                 }
 

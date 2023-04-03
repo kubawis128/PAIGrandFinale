@@ -76,7 +76,7 @@ export class Window{
 
     drawRounded(){
         let ctx = this.windowCanvas.getContext("2d")
-        console.log("Try to draw rounded windows")
+        //console.log("Try to draw rounded windows")
         // Main window
         ctx.fillStyle = "#414348"
         ctx.beginPath()

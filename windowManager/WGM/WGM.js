@@ -16,7 +16,7 @@ export class WGM {
             for(var elementKeys in currentElement){
                 element[elementKeys] = currentElement[elementKeys]
                 if(element.isEnumerable){
-                    console.log("Children owns children")
+                    //console.log("Children owns children")
                     element.parseChildren(element)
                 }
             }
@@ -26,6 +26,7 @@ export class WGM {
             element.updatePlaceHolders()
             this.rootElements.push(element)
         }
+        console.log(this.rootElements)
     }
 
     draw() {
@@ -36,4 +37,11 @@ export class WGM {
         })
     }
 
+    handleClick(x,y){
+        let clickTree = []
+        this.rootElements.forEach(element => {
+            element.checkCollision(clickTree,x,y)
+        })
+        return clickTree
+    }
 }

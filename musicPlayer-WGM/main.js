@@ -4,70 +4,53 @@ export class MusicPlayerWGM {
         this.canvas = canvas
         this.assetManager = assetManager
         this.WGM = new WGM(this.assetManager.assets.musicPlayer.layout,this.canvas)
+        this.audioCtx = new AudioContext()
+        this.playing = false
+        this.playSound = this.audioCtx.createBufferSource()
     }
 
     draw(){
+        let duration = this.WGM.rootElements[0].elements[1].elements[0].elements[1] // TODO: Change this to something like getElementByID
+        if(this.playSound.buffer){
+            duration.content = new Date(this.audioCtx.currentTime * 1000).toISOString().slice(11, 19)
+        }
         this.WGM.draw()
+
     }
-    /*draw(){
 
-        let yOffset = 0;
-        // Background
-        this.ctx.fillStyle = "#3f3f3f"
-        
-        
-        yOffset += this.canvas.height/20
-        this.ctx.fillStyle = "#ff0000"
-        this.ctx.beginPath()
-        this.ctx.roundRect(this.canvas.width/3, yOffset, this.canvas.width/3,this.canvas.width/3,5) 
-        this.ctx.closePath()
-        this.ctx.save()
-        this.ctx.clip();
-        this.ctx.drawImage(this.assetManager.assets.musicPlayer.glamour ,this.canvas.width/3, yOffset, this.canvas.width/3,this.canvas.width/3)
-        this.ctx.restore();
-
-        yOffset += this.canvas.width/3
-        this.ctx.font = "32px Minecraft";
-        this.ctx.fillStyle = "#FFFFFF"
-        let textSize = this.ctx.measureText("Death By Glamour")
-        yOffset += 32
-        this.ctx.fillText("Death By Glamour", (this.canvas.width/2)-textSize.width/2, yOffset);
-
-        this.ctx.font = "16px Minecraft";
-        textSize = this.ctx.measureText("1:11/3:13")
-        yOffset += 6 + 16
-        this.ctx.fillText("1:11/3:13", (this.canvas.width/2)-textSize.width/2, yOffset);
-        yOffset += 8
-
-        let icons = ["arrow_back", "chevron_left", "pause" , "chevron_right" , "arrow_forward"]
-        
-        this.ctx.font = "32px Material Symbols Outlined";
-        icons.forEach((icon,index) => {
-            this.ctx.fillStyle = "#3f3f3f"
-            let x = (this.canvas.width/8 * (index+1)) + Math.abs(((this.canvas.width/8)*6) / (icons.length - this.canvas.width/8)) * (index+1)
-            this.roundRect(this.ctx, x, yOffset, this.canvas.width/8,this.canvas.width/8,32)
-            this.ctx.fillStyle = "#FFFFFF"
-            this.ctx.fillText(icon, x + this.ctx.measureText(icon).width/4, yOffset + 32 + 8);
-        })
-        this.buttonLocationY = yOffset
-    }
-*/
     destroy(){
-        console.log("Bye  From Musish")
-    }
-/*
-    roundRect(ctx,x,y,width,height,round){
-        ctx.beginPath()
-        ctx.roundRect(x,y,width,height,round)
-        ctx.fill()
+        console.log("Bye From Musish")
     }
 
     handleClick(x,y){
-        for(let index = 0; index < 5; index++){
-            let buttonX = (this.canvas.width/8 * (index+1)) + Math.abs(((this.canvas.width/8)*6) / (5 - this.canvas.width/8)) * (index+1)
-            if(y > this.buttonLocationY && y < this.buttonLocationY + this.canvas.width/8 && x > buttonX && x < buttonX + this.canvas.width/8){
-                console.log("Clicked button ", index)
+        let clickedItems = this.WGM.handleClick(x,y)
+        clickedItems.forEach(async element => {
+            if(element.type == "Button"){
+                switch(element.id){
+                case "play":
+                    await this.play()
+                    break
+                default:
+                    break
+                }
+            }
+        })
+    }
+
+    async play(){
+        if(!this.playSound.buffer){
+            let decodedAudio = await this.audioCtx.decodeAudioData(this.assetManager.assets.musicPlayer.glamourAudio.slice())
+            // eslint-disable-next-line no-case-declarations
+            this.playSound.buffer = decodedAudio
+            this.playSound.connect(this.audioCtx.destination)
+            this.playSound.start(this.audioCtx.currentTime)
+        }else{
+            if(!this.playing){
+                this.audioCtx.resume()
+            }else{
+                this.audioCtx.suspend()
             }
         }
-    }*/
+        this.playing = !this.playing
+    }
 }

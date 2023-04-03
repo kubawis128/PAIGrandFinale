@@ -15,86 +15,96 @@
                     }
                 },
                 "1": {
-                    "Text": {
-                        "content": "Death By Glamour",
-                        "font": "32px Minecraft",
-                        "align": "center",
-                        "padding": 0
-                    }
-                },
-                "2": {
-                    "Text": {
-                        "content": "x:xx/x:xx",
-                        "font": "16px Minecraft",
-                        "align": "center",
-                        "padding": 10
-                    }
-                },
-                "3": {
                     "Grid": {
-                        "elements":{
-                            "0": {
-                                "Button": {
-                                    "content": "arrow_back",
-                                    "font": "32px Material Symbols Outlined",
-                                    "id": "back",
-                                    "padding": 5,
-                                    "rounded": 32,
-                                    "color": "#4f4f4f",
-                                    "fontColor": "#FFFFFF",
-                                    "innerPadding": 10
+                        "elements": {
+                            "0":{
+                                "List": {
+                                    "width":"{fullW}-{fullW}/10",
+                                    "elements": {
+                                        "0": {
+                                            "Text": {
+                                                "content": "Death By Glamour",
+                                                "font": "32px Minecraft",
+                                                "align": "centerScreen",
+                                                "padding": 0
+                                            }
+                                        },
+                                        "1": {
+                                            "Text": {
+                                                "content": "xx:xx:xx",
+                                                "font": "16px Minecraft",
+                                                "align": "centerScreen",
+                                                "padding": 10
+                                            }
+                                        },
+                                        "2": {
+                                            "Grid": {
+                                                "elements":{
+                                                    "0": {
+                                                        "Button": {
+                                                            "content": "arrow_back",
+                                                            "font": "32px Material Symbols Outlined",
+                                                            "id": "back",
+                                                            "padding": 5,
+                                                            "rounded": 32,
+                                                            "color": "#4f4f4f",
+                                                            "fontColor": "#FFFFFF",
+                                                            "innerPadding": 10
+                                                        }
+                                                    },
+                                                    "1": {
+                                                        "Button": {
+                                                            "content": "pause",
+                                                            "font": "32px Material Symbols Outlined",
+                                                            "id": "play",
+                                                            "padding": 5,
+                                                            "rounded": 32,
+                                                            "color": "#4f4f4f",
+                                                            "fontColor": "#FFFFFF",
+                                                            "innerPadding": 10
+                                                        }
+                                                    },
+                                                    "2": {
+                                                        "Button": {
+                                                            "content": "arrow_forward",
+                                                            "font": "32px Material Symbols Outlined",
+                                                            "id": "next",
+                                                            "padding": 5,
+                                                            "rounded": 32,
+                                                            "color": "#4f4f4f",
+                                                            "fontColor": "#FFFFFF",
+                                                            "innerPadding": 10
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             },
-                            "1": {
-                                "Button": {
-                                    "content": "chevron_left",
-                                    "font": "32px Material Symbols Outlined",
-                                    "id": "rewind",
-                                    "padding": 5,
-                                    "rounded": 32,
-                                    "color": "#4f4f4f",
-                                    "fontColor": "#FFFFFF",
-                                    "innerPadding": 10
-                                }
-                            },
-                            "2": {
-                                "Button": {
-                                    "content": "pause",
-                                    "font": "32px Material Symbols Outlined",
-                                    "id": "play",
-                                    "padding": 5,
-                                    "rounded": 32,
-                                    "color": "#4f4f4f",
-                                    "fontColor": "#FFFFFF",
-                                    "innerPadding": 10
-                                }
-                            },
-                            "3": {
-                                "Button": {
-                                    "content": "chevron_right",
-                                    "font": "32px Material Symbols Outlined",
-                                    "id": "fastforward",
-                                    "padding": 5,
-                                    "rounded": 32,
-                                    "color": "#4f4f4f",
-                                    "fontColor": "#FFFFFF",
-                                    "innerPadding": 10
-                                }
-                            },
-                            "4": {
-                                "Button": {
-                                    "content": "arrow_forward",
-                                    "font": "32px Material Symbols Outlined",
-                                    "id": "next",
-                                    "padding": 5,
-                                    "rounded": 32,
-                                    "color": "#4f4f4f",
-                                    "fontColor": "#FFFFFF",
-                                    "innerPadding": 10
+                            "1":{
+                                "List": {
+                                    "height": "100",
+                                    "elements": {
+                                        "0": {
+                                            "DebugSquare": {
+                                                "width": "10",
+                                                "height": "80",
+                                                "padding": 0,
+                                                "rounded": 10
+                                            }
+                                        },
+                                        "1": {
+                                            "Text": {
+                                                "content": "volume_up",
+                                                "font": "20px Material Symbols Outlined",
+                                                "padding": 10
+                                            }
+                                        }
+                                    }
                                 }
                             }
-                        },
-                        "align": "center"
+                        }
                     }
                 }
             }

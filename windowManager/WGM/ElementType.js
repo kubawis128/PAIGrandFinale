@@ -1,6 +1,6 @@
 export class Element {
-    width = 0
-    height = 0
+    width
+    height
     type
     isEnumerable = false
     id = ""
@@ -16,8 +16,13 @@ export class Element {
     }
 
     updatePlaceHolders(){
-        this.width = eval(replacePlaceholders(this.ctx, this.width))
-        this.height = eval(replacePlaceholders(this.ctx, this.height))
+        console.log("updatePlaceholders for", this)
+        if(typeof(this.width) == "string" && !this.width.includes("parent")){
+            this.width = eval(replacePlaceholders(this.ctx, this.width))
+        }
+        if(typeof(this.height) == "string" &&  !this.height.includes("parent")){
+            this.height = eval(replacePlaceholders(this.ctx, this.height))
+        }
         if(this.x){
             this.x = eval(replacePlaceholders(this.ctx, this.x))
         }
@@ -29,6 +34,14 @@ export class Element {
 
     getHeight(){
         return this.height
+    }
+
+    checkCollision(clickTree,x,y){
+        if(x > this.x && x < this.x + this.getWidth()){
+            if(y > this.y && y < this.y + this.getHeight()){
+                clickTree.push(this)
+            }
+        }
     }
 }
 class Enumerable extends Element {
@@ -47,19 +60,31 @@ class Enumerable extends Element {
                 let currentElement = element.elements[childElement]
                 let element1 = new Elements[Object.keys(currentElement)[0]]
                 element1.ctx = this.ctx
+                
                 for(var elementKeys in currentElement[Object.keys(currentElement)[0]]){
                     element1[elementKeys] = currentElement[Object.keys(currentElement)[0]][elementKeys]
                 }
                 if(element1.isEnumerable){
                     element.parseChildren(element1)
                 }
+                element1.parent = element
                 if(element1.afterInit){
                     element1.afterInit()
                 }
                 element1.updatePlaceHolders()
+                
                 newList.push(element1)
             }
+            console.log(newList)
             element.elements = newList
+        }
+    }
+
+    checkCollision(clickTree,x,y){
+        if(this.elements){
+            for(var childElement in this.elements){
+                this.elements[childElement].checkCollision(clickTree,x,y)
+            }
         }
     }
 
@@ -80,11 +105,14 @@ export class List extends Enumerable {
     }
 
     draw(ctx){
-        let lasty = 0
+        let lasty = this.y
         this.elements.forEach(child => {
+            let oldX = child.x
+            child.x = child.x + this.x
             child.y = lasty
             child.y += child.padding / 2
             child.draw(ctx)
+            child.x = oldX
             lasty = child.y + child.getHeight()
             lasty += child.padding / 2
         })
@@ -104,6 +132,7 @@ export class Grid extends Enumerable {
                 highestElement = child.getHeight()
             }
         })
+        this.height = highestElement
         return highestElement
     }
 
@@ -112,13 +141,14 @@ export class Grid extends Enumerable {
         this.elements.forEach(child => {
             totalWidth += child.getWidth()
         })
-        console.log("Get this grid width ",totalWidth)
         return totalWidth
     }
 
     draw(ctx){
-        console.log(ctx.canvas.clientWidth)
         let lastx = (ctx.canvas.clientWidth - this.getWidth()) /2
+        if(isNaN(lastx)){
+            lastx = 0
+        }
         this.elements.forEach(child => {
             child.y = this.y
             child.x = lastx
@@ -134,7 +164,7 @@ export class Image extends Element {
     }
 
     afterInit(){
-        console.warn("Image after init")
+        //.warn("Image after init")
         this.imageFile = document.createElement("img")
         this.imageFile.src = "/assets/" + this.src
         this.imageFile.onload = (loaded) => {
@@ -145,7 +175,7 @@ export class Image extends Element {
     }
 
     draw(ctx){
-        console.log(this.imageFile)
+        //console.log(this.imageFile)
         ctx.beginPath()
         ctx.roundRect(this.x,this.y,this.width,this.height,this.rounded) 
         ctx.closePath()
@@ -174,16 +204,16 @@ export class Text extends Element {
             ctx.fillStyle = "#ffffff"
         }
         switch (this.align) {
-        case "center":
-            console.log("Centered text")
+        case "centerScreen":
+            //console.log("Centered text")
             ctx.fillText(this.content, (ctx.canvas.clientWidth - (ctx.measureText(this.content).width))/2,this.y + this.fontSize)
             break
         case "rightAlign":
-            console.log("Centered text")
+            //console.log("Centered text")
             ctx.fillText(this.content, (ctx.canvas.clientWidth - (ctx.measureText(this.content).width)),this.y + this.fontSize)
             break
         default:
-            ctx.fillText(this.content, this.x,this.y + this.fontSize)
+            ctx.fillText(this.content, this.x - (ctx.measureText(this.content).width)/4 ,this.y + this.fontSize)
         }
         
     }
@@ -234,12 +264,39 @@ export class Button extends Element {
     }
 }
 
+export class DebugSquare extends Element {
+    height = 0
+    constructor(width,height,ctx){
+        super(width,height,"DebugSquare",ctx)
+    }
+
+    draw(ctx){
+        if(this.color){
+            ctx.fillStyle = this.color
+        }else{
+            ctx.fillStyle = "#ffffff"
+        }
+
+        ctx.beginPath()
+        ctx.roundRect(this.x,this.y, this.width, this.height,this.rounded)
+        ctx.fill()
+    }
+
+    getHeight(){
+        return this.height + this.padding
+    }
+
+    getWidth(){
+        return this.width + this.padding
+    }
+}
+
 function replacePlaceholders(ctx,string) {
     if(!string){
         return
     }
-    string = string.replace("{fullW}",ctx.canvas.clientWidth)
-    string = string.replace("{fullH}",ctx.canvas.clientHeight)
+    string = string.replaceAll("{fullW}",ctx.canvas.clientWidth)
+    string = string.replaceAll("{fullH}",ctx.canvas.clientHeight)
     return string
 }
 
@@ -249,5 +306,6 @@ const Elements = {
     "Text": Text,
     "Grid": Grid,
     "Button": Button,
+    "DebugSquare": DebugSquare,
 }
 export { Elements }
