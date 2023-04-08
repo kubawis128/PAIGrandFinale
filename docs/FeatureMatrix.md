@@ -13,7 +13,7 @@
 |color|-|-|❌|✅|✅|✅|
 |backgroundColor|❌|❌|❌|❌|✅|✅|
 |rounded|-|-|✅|-|✅|✅|
-|xOffset|❌|❌|✅|❌|❌|❌|
+|xOffset|✅|❌|❌|❌|❌|❌|
 |align|❌|❌|❌|✅|❌|❌|
 
 # General Element Tags
