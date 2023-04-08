@@ -6,6 +6,7 @@ export class Element {
     id = ""
     y = 0
     x = 0
+    xOffset = 0
     padding = 0
     rounded = 0
     constructor(width,height,type,ctx){
@@ -16,9 +17,11 @@ export class Element {
     }
 
     updatePlaceHolders(){
-        console.log("updatePlaceholders for", this)
         if(typeof(this.width) == "string" && !this.width.includes("parent")){
             this.width = eval(replacePlaceholders(this.ctx, this.width))
+        }
+        if(typeof(this.xOffset) == "string" && !this.xOffset.includes("parent")){
+            this.xOffset = eval(replacePlaceholders(this.ctx, this.xOffset))
         }
         if(typeof(this.height) == "string" &&  !this.height.includes("parent")){
             this.height = eval(replacePlaceholders(this.ctx, this.height))
@@ -55,7 +58,7 @@ class Enumerable extends Element {
 
         if(element.elements){
             for(var childElement in element.elements){
-                //console.log("Child: ", element.elements[childElement])
+
                 
                 let currentElement = element.elements[childElement]
                 let element1 = new Elements[Object.keys(currentElement)[0]]
@@ -75,7 +78,7 @@ class Enumerable extends Element {
                 
                 newList.push(element1)
             }
-            console.log(newList)
+
             element.elements = newList
         }
     }
@@ -106,13 +109,12 @@ export class List extends Enumerable {
 
     draw(ctx){
         let lasty = this.y
+        let lastX = this.x 
         this.elements.forEach(child => {
-            let oldX = child.x
-            child.x = child.x + this.x
+            child.x = lastX + child.xOffset
             child.y = lasty
             child.y += child.padding / 2
             child.draw(ctx)
-            child.x = oldX
             lasty = child.y + child.getHeight()
             lasty += child.padding / 2
         })
@@ -151,7 +153,7 @@ export class Grid extends Enumerable {
         }
         this.elements.forEach(child => {
             child.y = this.y
-            child.x = lastx
+            child.x = lastx + child.xOffset
             child.draw(ctx)
             lastx = lastx + child.getWidth()
         })
@@ -175,7 +177,6 @@ export class Image extends Element {
     }
 
     draw(ctx){
-        //console.log(this.imageFile)
         ctx.beginPath()
         ctx.roundRect(this.x,this.y,this.width,this.height,this.rounded) 
         ctx.closePath()
@@ -205,17 +206,19 @@ export class Text extends Element {
         }
         switch (this.align) {
         case "centerScreen":
-            //console.log("Centered text")
             ctx.fillText(this.content, (ctx.canvas.clientWidth - (ctx.measureText(this.content).width))/2,this.y + this.fontSize)
             break
         case "rightAlign":
-            //console.log("Centered text")
             ctx.fillText(this.content, (ctx.canvas.clientWidth - (ctx.measureText(this.content).width)),this.y + this.fontSize)
             break
         default:
             ctx.fillText(this.content, this.x - (ctx.measureText(this.content).width)/4 ,this.y + this.fontSize)
         }
         
+    }
+
+    getWidth(){
+        return this.ctx.measureText(this.content).width
     }
 
     getHeight(){
@@ -264,10 +267,11 @@ export class Button extends Element {
     }
 }
 
-export class DebugSquare extends Element {
+export class Slider extends Element {
     height = 0
+    position = 100
     constructor(width,height,ctx){
-        super(width,height,"DebugSquare",ctx)
+        super(width,height,"Slider",ctx)
     }
 
     draw(ctx){
@@ -280,6 +284,20 @@ export class DebugSquare extends Element {
         ctx.beginPath()
         ctx.roundRect(this.x,this.y, this.width, this.height,this.rounded)
         ctx.fill()
+
+        if(this.backgroundColor){
+            ctx.fillStyle = this.backgroundColor
+        }else{
+            ctx.fillStyle = "#ffffff"
+        }
+
+        ctx.beginPath()
+        if(this.sliderType == "vertical"){
+            ctx.roundRect(this.x,this.y - this.height * this.position / 100 + this.height, this.width, this.height * this.position / 100,this.rounded)
+        }else if(this.sliderType == "horizontal"){
+            ctx.roundRect(this.x ,this.y, this.width * this.position / 100, this.height,this.rounded)
+        }
+        ctx.fill()
     }
 
     getHeight(){
@@ -288,6 +306,19 @@ export class DebugSquare extends Element {
 
     getWidth(){
         return this.width + this.padding
+    }
+
+    checkCollision(clickTree,x,y){
+        if(x > this.x && x < this.x + this.getWidth()){
+            if(y > this.y && y < this.y + this.getHeight()){
+                if(this.sliderType == "vertical"){
+                    this.position = ((this.getHeight() - (y - this.y))/this.getHeight())*100
+                }else if(this.sliderType == "horizontal"){
+                    this.position = (x - this.x)/this.getWidth()*100
+                }
+                clickTree.push(this)
+            }
+        }
     }
 }
 
@@ -306,6 +337,6 @@ const Elements = {
     "Text": Text,
     "Grid": Grid,
     "Button": Button,
-    "DebugSquare": DebugSquare,
+    "Slider": Slider,
 }
 export { Elements }

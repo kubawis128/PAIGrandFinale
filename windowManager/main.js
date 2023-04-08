@@ -51,7 +51,7 @@ icons.push(new Icon(400, 100, "Music Player", assetLoader.assets.icons.music, ()
 }))
 
 icons.push(new Icon(500, 100, "Music Player WGM", assetLoader.assets.icons.music, () => {
-    let calcWindow = new Window(100,300, 400, 275, "Music Player WGM","canvas",renderer)
+    let calcWindow = new Window(100,300, 400, 300, "Music Player WGM","canvas",renderer)
 
     calcWindow.instance = new MusicPlayerWGM(calcWindow.inner,assetLoader)
 
@@ -60,11 +60,13 @@ icons.push(new Icon(500, 100, "Music Player WGM", assetLoader.assets.icons.music
 document.addEventListener("mousedown", (event) => {
     //console.log(event)
     if(event.target.id == "screen" || event.target.id == "titlebar"){
-        icons.forEach(icon => {
-            if(icon.check_collision(event.clientX, event.clientY)){
-                icon.exec()
-            }
-        })
+        if(event.target.id == "screen") {
+            icons.forEach(icon => {
+                if(icon.check_collision(event.clientX, event.clientY)){
+                    icon.exec()
+                }
+            })
+        }
 
         let clickedWindow = renderer.getClickedWindow(event.clientX, event.clientY)
         if(clickedWindow && clickedWindow.action == "close"){

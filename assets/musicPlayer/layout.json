@@ -9,9 +9,9 @@
                         "src": "musicPlayer/glamour.png",
                         "width": "{fullW}/3",
                         "height": "{fullW}/3",
-                        "x": "{fullW}/3",
                         "rounded": 5,
-                        "padding": 30
+                        "padding": 30,
+                        "xOffset": "{fullW}/3"
                     }
                 },
                 "1": {
@@ -31,13 +31,27 @@
                                         },
                                         "1": {
                                             "Text": {
-                                                "content": "xx:xx:xx",
+                                                "content": "xx:xx:xx / xx:xx:xx",
                                                 "font": "16px Minecraft",
                                                 "align": "centerScreen",
                                                 "padding": 10
                                             }
                                         },
                                         "2": {
+                                            "Slider": {
+                                                "id": "progress",
+                                                "color": "#888888",
+                                                "backgroundColor": "#dddddd",
+                                                "width": "{fullW}-{fullW}/10-50",
+                                                "xOffset": 40,
+                                                "height": "20",
+                                                "padding": 5,
+                                                "rounded": 20,
+                                                "position": 0,
+                                                "sliderType": "horizontal"
+                                            }
+                                        },
+                                        "3": {
                                             "Grid": {
                                                 "elements":{
                                                     "0": {
@@ -87,11 +101,15 @@
                                     "height": "100",
                                     "elements": {
                                         "0": {
-                                            "DebugSquare": {
+                                            "Slider": {
+                                                "color": "#888888",
+                                                "backgroundColor": "#dddddd",
                                                 "width": "10",
                                                 "height": "80",
                                                 "padding": 0,
-                                                "rounded": 10
+                                                "rounded": 10,
+                                                "position": 100,
+                                                "sliderType": "vertical"
                                             }
                                         },
                                         "1": {
