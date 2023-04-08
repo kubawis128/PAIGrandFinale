@@ -31,6 +31,8 @@ export class MusicPlayerWGM {
 
     destroy(){
         console.log("Bye From Musish")
+        this.playing = false
+        this.playSound.stop(0)
     }
 
     update(){

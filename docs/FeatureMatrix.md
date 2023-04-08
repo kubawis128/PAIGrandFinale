@@ -9,12 +9,13 @@
 
 |Feature|List|Grid|Image|Text|Button|Slider|
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-|padding|⚠️|⚠️|❌|❌|✅|❌|
+|padding|✅|✅|✅|✅|✅|✅|
 |color|-|-|❌|✅|✅|✅|
 |backgroundColor|❌|❌|❌|❌|✅|✅|
 |rounded|-|-|✅|-|✅|✅|
-|xOffset|✅|❌|❌|❌|❌|❌|
-|align|❌|❌|❌|✅|❌|❌|
+|xOffset|✅|✅|✅|✅|✅|✅|
+|yOffset|✅|✅|✅|✅|✅|✅|
+|align|❌|✅|❌|✅|❌|❌|
 
 # General Element Tags
 `x,y` - static coordinates

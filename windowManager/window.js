@@ -18,7 +18,7 @@ export class Window{
 
         this.windowCanvas = document.createElement("canvas")
         document.getElementsByTagName("body")[0].appendChild(this.windowCanvas)
-        this.windowCanvas.width = width+12
+        this.windowCanvas.width = width+6
         this.windowCanvas.height = height+34
         this.windowCanvas.style.left = x-6 + "px"
         this.windowCanvas.style.top = y + "px" 
@@ -29,7 +29,7 @@ export class Window{
         document.getElementsByTagName("body")[0].appendChild(this.inner)
         this.inner.width = width
         this.inner.height = height
-        this.inner.style.left = x + "px"
+        this.inner.style.left = x-3 + "px"
         this.inner.style.top = y+30 + "px" 
 
         this.renderer = rend
@@ -175,7 +175,7 @@ export class Window{
         }
     }
     updatePos(){
-        this.inner.style.left = this.x + "px"
+        this.inner.style.left = this.x-3 + "px"
         this.inner.style.top = (this.y-30)+60 + "px" 
 
         this.windowCanvas.style.left = this.x-6 + "px"
