@@ -233,8 +233,8 @@ export class Button extends Element {
     }
 
     draw(ctx){
-        if(this.color){
-            ctx.fillStyle = this.color
+        if(this.backgroundColor){
+            ctx.fillStyle = this.backgroundColor
         }else{
             ctx.fillStyle = "#ffffff"
         }
@@ -243,8 +243,8 @@ export class Button extends Element {
         ctx.roundRect(this.x + (this.padding/2),this.y ,this.ctx.measureText(this.content).width + this.innerPadding ,this.fontSize + this.innerPadding ,this.rounded)
         ctx.fill()
 
-        if(this.fontColor){
-            ctx.fillStyle = this.fontColor
+        if(this.color){
+            ctx.fillStyle = this.color
         }else{
             ctx.fillStyle = "#000000"
         }

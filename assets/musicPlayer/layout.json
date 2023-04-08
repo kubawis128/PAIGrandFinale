@@ -61,8 +61,8 @@
                                                             "id": "back",
                                                             "padding": 5,
                                                             "rounded": 32,
-                                                            "color": "#4f4f4f",
-                                                            "fontColor": "#FFFFFF",
+                                                            "backgroundColor": "#4f4f4f",
+                                                            "color": "#FFFFFF",
                                                             "innerPadding": 10
                                                         }
                                                     },
@@ -73,8 +73,8 @@
                                                             "id": "play",
                                                             "padding": 5,
                                                             "rounded": 32,
-                                                            "color": "#4f4f4f",
-                                                            "fontColor": "#FFFFFF",
+                                                            "backgroundColor": "#4f4f4f",
+                                                            "color": "#FFFFFF",
                                                             "innerPadding": 10
                                                         }
                                                     },
@@ -85,8 +85,8 @@
                                                             "id": "next",
                                                             "padding": 5,
                                                             "rounded": 32,
-                                                            "color": "#4f4f4f",
-                                                            "fontColor": "#FFFFFF",
+                                                            "backgroundColor": "#4f4f4f",
+                                                            "color": "#FFFFFF",
                                                             "innerPadding": 10
                                                         }
                                                     }
