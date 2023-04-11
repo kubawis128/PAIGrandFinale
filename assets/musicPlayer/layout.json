@@ -6,6 +6,7 @@
             "elements": {
                 "0": {
                     "Image": {
+                        "id": "cover",
                         "src": "musicPlayer/glamour.png",
                         "width": "{fullW}/3",
                         "height": "{fullW}/3",
@@ -23,6 +24,7 @@
                                     "elements": {
                                         "0": {
                                             "Text": {
+                                                "id": "title",
                                                 "content": "Death By Glamour",
                                                 "font": "32px Minecraft",
                                                 "align": "centerScreen",
@@ -31,6 +33,7 @@
                                         },
                                         "1": {
                                             "Text": {
+                                                "id": "duration",
                                                 "content": "xx:xx:xx / xx:xx:xx",
                                                 "font": "16px Minecraft",
                                                 "align": "centerScreen",
@@ -104,6 +107,7 @@
                                     "elements": {
                                         "0": {
                                             "Slider": {
+                                                "id": "volume",
                                                 "color": "#dddddd",
                                                 "backgroundColor": "#888888",
                                                 "width": "10",

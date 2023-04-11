@@ -8,8 +8,8 @@ import {Game} from "../tetris/tetris.js"
 import {DOOM} from "../doom/doom.js"
 import {Calc} from "../calc/main.js"
 
-import {MusicPlayer} from "../musicPlayer/main.js"
 import {MusicPlayerWGM} from "../musicPlayer-WGM/main.js"
+import { VideoPlayerWGM } from "../videoPlayer/main.js"
 
 let assetLoader = new Loader()
 
@@ -42,15 +42,15 @@ icons.push(new Icon(300, 100, "Calculator", assetLoader.assets.icons.doom, () =>
     renderer.addWindow(calcWindow)
 }))
 
-icons.push(new Icon(400, 100, "Music Player", assetLoader.assets.icons.music, () => {
-    let calcWindow = new Window(100,300, 400, 275, "Music Player","canvas",renderer)
+icons.push(new Icon(400, 100, "Video Player", assetLoader.assets.icons.music, () => {
+    let calcWindow = new Window(100,300, 400, 275, "Video Player","canvas",renderer)
 
-    calcWindow.instance = new MusicPlayer(calcWindow.inner,assetLoader)
+    calcWindow.instance = new VideoPlayerWGM(calcWindow.inner,assetLoader)
 
     renderer.addWindow(calcWindow)
 }))
 
-icons.push(new Icon(500, 100, "Music Player WGM", assetLoader.assets.icons.music, () => {
+icons.push(new Icon(500, 100, "Music Player", assetLoader.assets.icons.music, () => {
     let calcWindow = new Window(100,300, 400, 300, "Music Player WGM","canvas",renderer)
 
     calcWindow.instance = new MusicPlayerWGM(calcWindow.inner,assetLoader)

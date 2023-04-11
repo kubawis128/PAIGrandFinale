@@ -7,15 +7,15 @@
 |❌|**Not Working**|
 |-| **not applicable**
 
-|Feature|List|Grid|Image|Text|Button|Slider|
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-|padding|✅|✅|✅|✅|✅|✅|
-|color|-|-|❌|✅|✅|✅|
-|backgroundColor|❌|❌|❌|❌|✅|✅|
-|rounded|-|-|✅|-|✅|✅|
-|xOffset|✅|✅|✅|✅|✅|✅|
-|yOffset|✅|✅|✅|✅|✅|✅|
-|align|❌|✅|❌|✅|❌|❌|
+|Feature|List|Grid|Image|Text|Button|Slider|HTMLElement|
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+|padding|✅|✅|✅|✅|✅|✅|✅|
+|color|-|-|❌|✅|✅|✅|❌|
+|backgroundColor|❌|❌|❌|❌|✅|✅|❌|
+|rounded|-|-|✅|-|✅|✅|-|
+|xOffset|✅|✅|✅|✅|✅|✅|✅|
+|yOffset|✅|✅|✅|✅|✅|✅|✅|
+|align|❌|✅|❌|✅|❌|❌|❌|
 
 # General Element Tags
 `x,y` - static coordinates
@@ -56,3 +56,8 @@
 `position` - What is the progress of the bar from 0 to 100
 
 `sliderType` - Whether it is `vertical` or `horizontal`
+
+
+## HTMLElement
+
+`HTMLtag` - specifies what will the HTML tag will be

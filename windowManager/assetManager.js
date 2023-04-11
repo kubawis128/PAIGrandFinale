@@ -11,10 +11,16 @@ export class Loader{
                 wallpaper: "wallpaper.png",
             },
             musicPlayer: {
+                layout: "layout.json",
+                songs: "songs.json",
                 glamour: "glamour.png",
                 glamourAudio: "glamour.mp3",
-                layout: "layout.json",
+                WildSide: "WildSide.png",
+                WildSideAudio: "WildSide.mp3",
             },
+            videoPlayer: {
+                layout: "layout.json"
+            }
         }
         this.assets = {} 
         this.addToList(this.assets,assets,"/assets/")

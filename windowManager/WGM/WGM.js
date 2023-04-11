@@ -44,4 +44,19 @@ export class WGM {
         })
         return clickTree
     }
+
+    getByID(id){
+        for(var key in this.rootElements){
+            let currentElement = this.rootElements[key]
+            if (currentElement.id == id){
+                return currentElement
+            }
+            if(currentElement.isEnumerable) {
+                let testId = currentElement.getByID(id)
+                if(testId){
+                    return testId
+                }
+            }
+        }
+    }
 }

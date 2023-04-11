@@ -98,6 +98,23 @@ class Enumerable extends Element {
         }
     }
 
+    getByID(id){
+        if(this.elements){
+            for(var key in this.elements){
+                let currentElement = this.elements[key]
+                if (currentElement.id == id){
+                    return currentElement
+                }
+                if(currentElement.isEnumerable) {
+                    let testId = currentElement.getByID(id)
+                    if(testId){
+                        return testId
+                    }
+                }
+            }
+        }
+    }
+
 }
 export class List extends Enumerable {
     constructor(width,height,ctx){
@@ -172,6 +189,10 @@ export class Image extends Element {
     }
 
     afterInit(){
+        this.reloadImg()
+    }
+
+    reloadImg(){
         this.imageFile = document.createElement("img")
         this.imageFile.src = "/assets/" + this.src
         this.imageFile.onload = (loaded) => {
@@ -327,6 +348,38 @@ export class Slider extends Element {
     }
 }
 
+export class HTMLElement extends Element {
+    HTMLtag = ""
+    constructor(width,height,ctx){
+        super(width,height,"HTMLElement",ctx)
+    }
+
+    afterInit(){
+        this.tag = document.createElement(this.HTMLtag)
+        this.tag.style.position = "absolute"
+        console.warn(this.x + (this.padding / 2) + parseInt(this.ctx.canvas.style.left) + "px")
+        this.tag.style.left = this.x + (this.padding / 2) + this.xOffset + parseInt(this.ctx.canvas.style.left) + "px"
+        this.tag.style.top = this.y + (this.padding / 2) + this.yOffset + parseInt(this.ctx.canvas.style.top) + "px"
+        this.tag.style.width = this.width
+        this.tag.style.height = this.height
+        document.body.appendChild(this.tag)
+        console.log(this.ctx.canvas.style)
+    }
+
+    // eslint-disable-next-line no-unused-vars
+    draw(_ctx){
+        // Browser handles the html render
+    }
+
+    getHeight(){
+        return this.height + this.padding
+    }
+
+    getWidth(){
+        return this.width + this.padding
+    }
+}
+
 function replacePlaceholders(ctx,string) {
     if(!string){
         return
@@ -343,5 +396,6 @@ const Elements = {
     "Grid": Grid,
     "Button": Button,
     "Slider": Slider,
+    "HTMLElement": HTMLElement,
 }
 export { Elements }
