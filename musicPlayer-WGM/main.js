@@ -16,8 +16,6 @@ export class MusicPlayerWGM {
 
         // https://stackoverflow.com/questions/3488591/how-to-kick-ass-pass-scope-through-setinterval
         setInterval(this.update.bind(this),1000)
-
-        console.log("Found by ID", this.WGM.getByID("volume"))
     }
 
     draw(){
@@ -37,8 +35,10 @@ export class MusicPlayerWGM {
 
     destroy(){
         console.log("Bye From Musish")
-        this.playing = false
-        this.playSound.stop(0)
+        if(this.playing){
+            this.playSound.stop(0)
+            this.playing = false
+        }
     }
 
     update(){
@@ -54,16 +54,10 @@ export class MusicPlayerWGM {
     handleClick(x,y){
         let clickedItems = this.WGM.handleClick(x,y)
         clickedItems.forEach(async element => {
-            if(element.type == "Button"){
-                switch(element.id){
-                case "play":
-                    await this.play()
-                    break
-                default:
-                    break
-                }
-            }
             switch (element.id) {
+            case "play":
+                await this.play()
+                break
             case "progress":
                 await this.playSound.stop(0)
                 await this.init()
@@ -100,8 +94,6 @@ export class MusicPlayerWGM {
                 this.playing = true
                 break
             default:
-                console.log(element.id)
-
                 break
             }
         })

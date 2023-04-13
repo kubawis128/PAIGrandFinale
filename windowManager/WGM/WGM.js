@@ -37,6 +37,12 @@ export class WGM {
         })
     }
 
+    destoryEvent(){
+        this.rootElements.forEach(element => {
+            element.destoryEvent()
+        })
+    }
+
     handleClick(x,y){
         let clickTree = []
         this.rootElements.forEach(element => {
@@ -58,5 +64,11 @@ export class WGM {
                 }
             }
         }
+    }
+
+    handleResize(){
+        this.rootElements.forEach(element => {
+            element.handleResize()
+        })
     }
 }

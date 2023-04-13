@@ -107,8 +107,6 @@ export class Game {
             row.forEach((col, colIndex) => {
                 if(col != null){
                     if(col == "R"){
-                        console.log("Right collision")
-                        console.log("this.playingPiece.x+colIndex: " + this.playingPiece.x+colIndex)
                         if(this.playingPiece.x+colIndex-1 > 9){
                             blocked.push("R")
                         }
@@ -174,7 +172,6 @@ export class Game {
             this.grid = this.olderPiece
             if(this.grid.get_cell(0, 5) != null || this.grid.get_cell(0, 6) != null){
                 this.state = state.GameOver
-                console.log("over")
                 this.rend.drawGameOver()
             }
             if(this.checkGameOver()){
