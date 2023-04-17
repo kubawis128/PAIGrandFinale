@@ -9,7 +9,7 @@ import {DOOM} from "../doom/doom.js"
 import {CalcWGM} from "../calc/main.js"
 
 import {MusicPlayerWGM} from "../musicPlayer-WGM/main.js"
-import { VideoPlayerWGM } from "../videoPlayer/main.js"
+import {VideoPlayerWGM} from "../videoPlayer/main.js"
 
 let assetLoader = new Loader()
 
@@ -43,9 +43,11 @@ icons.push(new Icon(300, 100, "Calculator", assetLoader.assets.icons.doom, () =>
 }))
 
 icons.push(new Icon(400, 100, "Video Player", assetLoader.assets.icons.music, () => {
-    let calcWindow = new Window(100,300, 400, 275, "Video Player","canvas",renderer)
+    let calcWindow = new Window(100,300, 640, 550, "Video Player","canvas",renderer)
 
     calcWindow.instance = new VideoPlayerWGM(calcWindow.inner,assetLoader)
+    
+    calcWindow.instance.window = calcWindow
 
     renderer.addWindow(calcWindow)
 }))
@@ -58,7 +60,6 @@ icons.push(new Icon(500, 100, "Music Player", assetLoader.assets.icons.music, ()
     renderer.addWindow(calcWindow)
 }))
 document.addEventListener("mousedown", (event) => {
-    //console.log(event)
     if(event.target.id == "screen" || event.target.id == "titlebar"){
         if(event.target.id == "screen") {
             icons.forEach(icon => {

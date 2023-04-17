@@ -80,7 +80,7 @@ export class Window{
         // Main window
         ctx.fillStyle = "#414348"
         ctx.beginPath()
-        ctx.roundRect(0, 0, this.width+6, this.height+33,[6,6,6,6])
+        ctx.roundRect(0, 0, this.width+6, this.height+33,6)
         ctx.fill()
 
         // Tile Bar
@@ -188,5 +188,12 @@ export class Window{
                 this.instance.handleClick(x - this.x,y - this.y - 32)
             }
         }
+    }
+
+    resize(width,height){
+        this.windowCanvas.width = width+6
+        this.windowCanvas.height = height+34
+        this.width = this.windowCanvas.width
+        this.height = this.windowCanvas.height
     }
 }

@@ -122,7 +122,7 @@
                                             "Text": {
                                                 "content": "volume_up",
                                                 "font": "20px Material Symbols Outlined",
-                                                "padding": 10
+                                                "yOffset": 10
                                             }
                                         }
                                     }

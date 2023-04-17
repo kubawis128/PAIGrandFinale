@@ -19,21 +19,28 @@ export class Element {
 
     updatePlaceHolders(){
         if(typeof(this.width) == "string"){
+            this.widthPlaceHolder = this.width
             this.width = eval(replacePlaceholders(this.ctx, this.width))
         }
+        if(typeof(this.height) == "string"){
+            this.heightPlaceHolder = this.height
+            this.height = eval(replacePlaceholders(this.ctx, this.height))
+        }
         if(typeof(this.xOffset) == "string"){
+            this.xOffsetPlaceHolder = this.xOffset
             this.xOffset = eval(replacePlaceholders(this.ctx, this.xOffset))
         }
         if(typeof(this.yOffset) == "string"){
+            this.yOffsetPlaceHolder = this.yOffset
             this.yOffset = eval(replacePlaceholders(this.ctx, this.yOffset))
         }
-        if(typeof(this.height) == "string"){
-            this.height = eval(replacePlaceholders(this.ctx, this.height))
-        }
+
         if(this.x){
+            this.xPlaceHolder = this.x
             this.x = eval(replacePlaceholders(this.ctx, this.x))
         }
         if(this.y){
+            this.yPlaceHolder = this.y
             this.y = eval(replacePlaceholders(this.ctx, this.y))
         }
     }
@@ -53,6 +60,33 @@ export class Element {
             }
         }
     }
+
+    handleResize(){
+        console.warn("resize event")
+        if(this.widthPlaceHolder){
+            this.width = eval(replacePlaceholders(this.ctx, this.widthPlaceHolder))
+        }
+        if(this.heightPlaceHolder){
+            this.height = eval(replacePlaceholders(this.ctx, this.heightPlaceHolder))
+        }
+        if(this.xOffsetPlaceHolder){
+            this.xOffset = eval(replacePlaceholders(this.ctx, this.xOffsetPlaceHolder))
+        }
+        if(this.yOffsetPlaceHolder){
+            this.yOffset = eval(replacePlaceholders(this.ctx, this.yOffsetPlaceHolder))
+        }
+        if(this.xPlaceHolder){
+            this.x = eval(replacePlaceholders(this.ctx, this.xPlaceHolder))
+        }
+        if(this.yPlaceHolder){
+            this.y = eval(replacePlaceholders(this.ctx, this.yPlaceHolder))
+        }
+    }
+
+    destoryEvent(){
+        console.log("destroy", this.type)
+        // Empty
+    }
 }
 class Enumerable extends Element {
     constructor(width,height,type,ctx){
@@ -68,14 +102,17 @@ class Enumerable extends Element {
 
                 
                 let currentElement = element.elements[childElement]
+                console.warn(currentElement)
                 let element1 = new Elements[Object.keys(currentElement)[0]]
                 element1.ctx = this.ctx
                 
                 for(var elementKeys in currentElement[Object.keys(currentElement)[0]]){
                     element1[elementKeys] = currentElement[Object.keys(currentElement)[0]][elementKeys]
                 }
-                if(element1.isEnumerable){
+                if(element1.isEnumerable && element1.type != "HTMLElement"){
                     element.parseChildren(element1)
+                }else if (element1.isEnumerable && element1.type == "HTMLElement"){
+                    element1.parseChildren(element1)
                 }
                 element1.parent = element
                 if(element1.afterInit){
@@ -115,6 +152,41 @@ class Enumerable extends Element {
         }
     }
 
+    handleResize(){
+        console.warn("resize event")
+        for(var key in this.elements){
+            let currentElement = this.elements[key]
+            if(currentElement.widthPlaceHolder){
+                currentElement.width = eval(replacePlaceholders(currentElement.ctx, currentElement.widthPlaceHolder))
+            }
+            if(currentElement.heightPlaceHolder){
+                currentElement.height = eval(replacePlaceholders(currentElement.ctx, currentElement.heightPlaceHolder))
+            }
+            if(currentElement.xOffsetPlaceHolder){
+                currentElement.xOffset = eval(replacePlaceholders(currentElement.ctx, currentElement.xOffsetPlaceHolder))
+            }
+            if(currentElement.yOffsetPlaceHolder){
+                currentElement.yOffset = eval(replacePlaceholders(currentElement.ctx, currentElement.yOffsetPlaceHolder))
+            }
+            if(currentElement.xPlaceHolder){
+                currentElement.x = eval(replacePlaceholders(currentElement.ctx, currentElement.xPlaceHolder))
+            }
+            if(currentElement.yPlaceHolder){
+                currentElement.y = eval(replacePlaceholders(currentElement.ctx, currentElement.yPlaceHolder))
+            }
+            if(currentElement.isEnumerable) {
+                currentElement.handleResize()
+            }
+        }
+    }
+
+    destoryEvent(){
+        if(this.elements){
+            for(var childElement in this.elements){
+                this.elements[childElement].destoryEvent()
+            }
+        }
+    }
 }
 export class List extends Enumerable {
     constructor(width,height,ctx){
@@ -238,7 +310,7 @@ export class Text extends Element {
             ctx.fillText(this.content, (ctx.canvas.clientWidth - (ctx.measureText(this.content).width)) + this.padding/2 + this.xOffset, this.y + this.fontSize + this.padding/2 + this.yOffset)
             break
         default:
-            ctx.fillText(this.content, this.x - (ctx.measureText(this.content).width)/4  + this.padding/2  + this.xOffset,this.y + this.fontSize  + this.padding/2 + this.yOffset)
+            ctx.fillText(this.content, this.x + this.padding/2  + this.xOffset ,this.y + this.fontSize + this.padding/2 + this.yOffset)
         }
         
     }
@@ -266,16 +338,20 @@ export class Button extends Element {
         }
 
         ctx.beginPath()
-        ctx.roundRect(this.x + (this.padding/2) + this.xOffset,this.y +this.yOffset,this.ctx.measureText(this.content).width + this.innerPadding ,this.fontSize + this.innerPadding ,this.rounded)
+        ctx.roundRect(
+            this.x + (this.padding/2) + this.xOffset,
+            this.y + (this.padding/2) + this.yOffset,
+            this.measuredTextWidth + this.innerPadding,
+            this.fontSize + this.innerPadding,
+            this.rounded)
         ctx.fill()
-
         if(this.color){
             ctx.fillStyle = this.color
         }else{
             ctx.fillStyle = "#000000"
         }
         ctx.font = this.font
-        ctx.fillText(this.content,this.x + (this.padding/2) + (this.innerPadding/2) + this.xOffset,this.y + this.fontSize + (this.innerPadding /2) + this.yOffset)
+        ctx.fillText(this.content,this.x + (this.padding/2) + (this.innerPadding/2) + this.xOffset,this.y + this.fontSize + (this.innerPadding/2) + this.yOffset)
     }
 
     afterInit() {
@@ -289,6 +365,7 @@ export class Button extends Element {
 
     getWidth(){
         this.ctx.font = this.font
+        this.measuredTextWidth = this.ctx.measureText(this.content).width
         return this.ctx.measureText(this.content).width + this.padding + this.innerPadding
     }
 }
@@ -348,10 +425,11 @@ export class Slider extends Element {
     }
 }
 
-export class HTMLElement extends Element {
+export class HTMLElement extends Enumerable {
     HTMLtag = ""
     constructor(width,height,ctx){
         super(width,height,"HTMLElement",ctx)
+        this.isEnumerable = true
     }
 
     afterInit(){
@@ -360,15 +438,31 @@ export class HTMLElement extends Element {
         console.warn(this.x + (this.padding / 2) + parseInt(this.ctx.canvas.style.left) + "px")
         this.tag.style.left = this.x + (this.padding / 2) + this.xOffset + parseInt(this.ctx.canvas.style.left) + "px"
         this.tag.style.top = this.y + (this.padding / 2) + this.yOffset + parseInt(this.ctx.canvas.style.top) + "px"
-        this.tag.style.width = this.width
-        this.tag.style.height = this.height
-        document.body.appendChild(this.tag)
-        console.log(this.ctx.canvas.style)
+        this.tag.style.width = this.width + "px"
+        this.tag.style.height = this.height + "px"
+        this.tag.id = this.ctx.canvas.id // quick fix for crash when clicking html element without a window UUID
+        console.warn(this.parent)
+        for(let child in this.elements){
+            console.warn("dziecek")
+            if(this.elements[child].afterInit){
+                this.elements[child].afterInit()
+            }
+            if(this.elements[child].type == "HTMLElement"){
+                this.tag.appendChild(this.elements[child].tag)
+            }
+        }
+        if(this.parent.type != "HTMLElement"){
+            document.body.appendChild(this.tag)
+        }        
     }
 
     // eslint-disable-next-line no-unused-vars
     draw(_ctx){
-        // Browser handles the html render
+        this.tag.style.left = this.x + (this.padding / 2) + this.xOffset + parseInt(this.ctx.canvas.style.left) + "px"
+        this.tag.style.top = this.y + (this.padding / 2) + this.yOffset + parseInt(this.ctx.canvas.style.top) + "px"
+        this.tag.style.width = this.width + "px"
+        this.tag.style.height = this.height + "px"
+        // Browser handles the rest
     }
 
     getHeight(){
@@ -377,6 +471,31 @@ export class HTMLElement extends Element {
 
     getWidth(){
         return this.width + this.padding
+    }
+
+    getByID(id){
+        if(this.elements){
+            for(var key in this.elements){
+                let currentElement = this.elements[key]
+                if (currentElement.id == id){
+                    return currentElement
+                }
+                if(currentElement.isEnumerable) {
+                    let testId = currentElement.getByID(id)
+                    if(testId){
+                        return testId
+                    }
+                }
+            }
+        }
+    }
+
+    destoryEvent(){
+        if(this.parent.type == "HTMLElement"){
+            this.parent.tag.removeChild(this.tag)
+        }else{
+            document.body.removeChild(this.tag)
+        }
     }
 }
 

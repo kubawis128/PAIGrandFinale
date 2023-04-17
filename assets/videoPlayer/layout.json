@@ -1,12 +1,99 @@
 {
     "background": "#414348",
     "elements": {
-        "HTMLElement": {
-            "x": 0,
-            "y": 0,
-            "width": 100,
-            "height": 100,
-            "HTMLtag": "video"
+        "List": {
+            "width":"{fullW}",
+            "elements": {
+                "0": {
+                    "HTMLElement": {
+                        "id": "video",
+                        "x": 0,
+                        "y": 0,
+                        "width": 640,
+                        "height": 480,
+                        "HTMLtag": "video",
+                        "padding": 20,
+                        "elements": {
+                            "0": {
+                                "HTMLElement": {
+                                    "id": "source",
+                                    "HTMLtag": "source"
+                                }
+                            }
+                        }
+                    }
+                },
+                "1": {
+                    "List": {
+                        "elements": {
+                            "0": {
+                                "Slider":{
+                                    "sliderType": "horizontal",
+                                    "color": "#dddddd",
+                                    "backgroundColor": "#888888",
+                                    "height": 20,
+                                    "width":"{fullW}-10",
+                                    "rounded": 20,
+                                    "position": 0,
+                                    "id": "progress"
+                                }
+                            },
+                            "1": {
+                                "Grid": {
+                                    "elements": {
+                                        "0": {
+                                            "Button": {
+                                                "content": "play_arrow",
+                                                "font": "32px Material Symbols Outlined",
+                                                "id": "play",
+                                                "padding": 5,
+                                                "rounded": 32,
+                                                "backgroundColor": "#4f4f4f",
+                                                "color": "#FFFFFF",
+                                                "innerPadding": 10
+                                            }
+                                        },
+                                        "1": {
+                                            "Text": {
+                                                "id": "duration",
+                                                "content": "xx:xx:xx / xx:xx:xx",
+                                                "font": "16px Minecraft",
+                                                "yOffset": "15/2-1",
+                                                "padding": 10
+                                            }
+                                        },
+                                        "2": {
+                                            "Text": {
+                                                "content": "volume_up",
+                                                "font": "20px Material Symbols Outlined",
+                                                "xOffset": "{fullW}-60-60-160-16",
+                                                "yOffset": 10
+                                            }
+                                        },
+                                        "3": {
+                                            "Slider":{
+                                                "sliderType": "horizontal",
+                                                "color": "#dddddd",
+                                                "backgroundColor": "#888888",
+                                                "height": 10,
+                                                "width":"60",
+                                                "xOffset": "{fullW}-60-60-160-16",
+                                                "yOffset": "15",
+                                                "rounded": 10,
+                                                "position": 100,
+                                                "id": "volume"
+                                            }
+                                        }
+                                    },
+                                    "padding": 10
+                                }
+                            }
+                        },
+                        "padding": 10
+                    }
+                }
+            }
         }
+
     }
 }

@@ -9,10 +9,10 @@ export class Renderer{
             this.ctx.roundRect(0,0,0,0,4)
             this.ctx.fill()
             this.supportsRounded = true
-            console.log("The browser does support drawing rounded windows")
+            console.error("The browser does support drawing rounded windows")
         }catch (error){
             this.supportsRounded = false
-            console.log("The browser does not support drawing rounded windows")
+            console.error("The browser does not support drawing rounded windows")
         }
         
     }
