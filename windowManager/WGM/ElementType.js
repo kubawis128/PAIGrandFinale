@@ -380,6 +380,27 @@ export class HTMLElement extends Element {
     }
 }
 
+export class DebugSquare extends Element {
+    constructor(width,height,ctx){
+        super(width,height,"HTMLElement",ctx)
+    }
+
+    afterInit(){
+
+    }
+
+    // eslint-disable-next-line no-unused-vars
+    draw(ctx){
+        ctx.beginPath()
+        ctx.roundRect(this.x + (this.padding/2) + this.xOffset,
+            this.y + (this.padding/2) + this.yOffset,
+            this.width,
+            this.height,
+            this.rounded)
+        ctx.fill()
+    }
+}
+
 function replacePlaceholders(ctx,string) {
     if(!string){
         return
@@ -397,5 +418,6 @@ const Elements = {
     "Button": Button,
     "Slider": Slider,
     "HTMLElement": HTMLElement,
+    "DebugSquare": DebugSquare,
 }
 export { Elements }

@@ -20,7 +20,8 @@ export class Loader{
             },
             videoPlayer: {
                 layout: "layout.json"
-            }
+            },
+            calculatorLayout: "calculatorLayout.json"
         }
         this.assets = {} 
         this.addToList(this.assets,assets,"/assets/")

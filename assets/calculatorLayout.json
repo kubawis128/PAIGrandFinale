@@ -1,0 +1,19 @@
+{
+    "background": "#414348",
+    "elements": {
+        "List": {
+            "width":"{fullW}",
+            "elements": {
+                "0": {
+                    "DebugSquare": {
+                        "id": "cover",
+                        "width": "{fullW}/3",
+                        "height": "{fullW}/3",
+                        "rounded": 5,
+                        "padding": 30
+                    }
+                }
+            }
+        }
+    }
+}
