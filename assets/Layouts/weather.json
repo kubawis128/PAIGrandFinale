@@ -1,0 +1,66 @@
+{
+    "background": "#414348",
+    "elements": {
+        "List": {
+            "width":"{fullW}",
+            "elements": {
+                "0":{
+                    "Grid": {
+                        "elements": {
+                            "0": {
+                                "Image": {
+                                    "id": "icon",
+                                    "src": "weather/icons/01.png",
+                                    "width": 64,
+                                    "height": 64
+                                }
+                            },
+                            "1": {
+                                "List": {
+                                    "elements": {
+                                        "0": {
+                                            "Text": {
+                                                "id": "city",
+                                                "content": "",
+                                                "font": "64px Minecraft"
+                                            }
+                                        },
+                                        "1": {
+                                            "Text": {
+                                                "id": "temperature",
+                                                "content": "xx°",
+                                                "font": "32px Minecraft"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "1":{
+                    "Grid": {
+                        "elements": {
+                            "0": {
+                                "Text": {
+                                    "id": "feels",
+                                    "content": "Feels like: xx°",
+                                    "font": "16px Minecraft"
+
+                                }
+                            },
+                            "1": {
+                                "Text": {
+                                    "id": "humidity",
+                                    "content": "Humidity: xx°",
+                                    "font": "16px Minecraft",
+                                    "xOffset": 10
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

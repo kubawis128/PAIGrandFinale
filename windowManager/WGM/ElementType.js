@@ -501,7 +501,7 @@ export class HTMLElement extends Enumerable {
 
 export class DebugSquare extends Element {
     constructor(width,height,ctx){
-        super(width,height,"HTMLElement",ctx)
+        super(width,height,"DebugSquare",ctx)
     }
 
     afterInit(){
@@ -510,6 +510,11 @@ export class DebugSquare extends Element {
 
     // eslint-disable-next-line no-unused-vars
     draw(ctx){
+        if(this.color){
+            ctx.fillStyle = this.color
+        }else{
+            ctx.fillStyle = "#ffffff"
+        }
         ctx.beginPath()
         ctx.roundRect(this.x + (this.padding/2) + this.xOffset,
             this.y + (this.padding/2) + this.yOffset,

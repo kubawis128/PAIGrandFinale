@@ -1,10 +1,10 @@
-import { WGM } from "../windowManager/WGM/WGM.js"
+import { WGM } from "../../windowManager/WGM/WGM.js"
 export class VideoPlayerWGM {
     constructor(canvas, assetManager){
         this.canvas = canvas
         this.assetManager = assetManager
 
-        this.WGM = new WGM(this.assetManager.assets.videoPlayer.layout,this.canvas)
+        this.WGM = new WGM(this.assetManager.assets.Layouts.videoPlayer,this.canvas)
 
         this.source = this.WGM.getByID("source")
         this.source.tag.src = "/assets/videoPlayer/test.mp4"

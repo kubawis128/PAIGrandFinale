@@ -10,7 +10,8 @@
                         "width": "{fullW}/3",
                         "height": "{fullW}/3",
                         "rounded": 5,
-                        "padding": 30
+                        "padding": 30,
+                        "color": "#ffffff"
                     }
                 }
             }

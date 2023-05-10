@@ -4,12 +4,13 @@ import {Desktop, Icon} from "./desktop.js"
 import {Loader} from "./assetManager.js"
 
 // Applications
-import {Game} from "../tetris/tetris.js"
-import {DOOM} from "../doom/doom.js"
-import {CalcWGM} from "../calc/main.js"
+import {Game} from "../apps/tetris/tetris.js"
+import {DOOM} from "../apps/doom/doom.js"
+import {CalcWGM} from "../apps/calc/main.js"
 
-import {MusicPlayerWGM} from "../musicPlayer-WGM/main.js"
-import {VideoPlayerWGM} from "../videoPlayer/main.js"
+import {MusicPlayerWGM} from "../apps/musicPlayer-WGM/main.js"
+import {VideoPlayerWGM} from "../apps/videoPlayer/main.js"
+import {WeatherWGM} from "../apps/weather/main.js"
 
 let assetLoader = new Loader()
 
@@ -59,6 +60,15 @@ icons.push(new Icon(500, 100, "Music Player", assetLoader.assets.icons.music, ()
 
     renderer.addWindow(calcWindow)
 }))
+
+icons.push(new Icon(700, 100, "Current Weather", assetLoader.assets.icons.music, () => {
+    let calcWindow = new Window(100,300, 400, 300, "Weather","canvas",renderer)
+
+    calcWindow.instance = new WeatherWGM(calcWindow.inner,assetLoader)
+
+    renderer.addWindow(calcWindow)
+}))
+
 document.addEventListener("mousedown", (event) => {
     if(event.target.id == "screen" || event.target.id == "titlebar"){
         if(event.target.id == "screen") {

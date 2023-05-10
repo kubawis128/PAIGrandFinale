@@ -6,10 +6,10 @@ export class DOOM{
         script.src = "https://www.midijs.net/lib/midi.js"
         this.script = document.body.appendChild(script)
         let script1 = document.createElement("script")
-        script1.src = "/doom/pcm-player.js"
+        script1.src = "/apps/doom/pcm-player.js"
         this.script1 = document.body.appendChild(script1)
         let script2 = document.createElement("script")
-        script2.src = "/doom/mus2midi.js"
+        script2.src = "/apps/doom/mus2midi.js"
         this.script2 = document.body.appendChild(script2)
         this.memory = new WebAssembly.Memory({ initial : 108 })
         var memory = this.memory
@@ -84,7 +84,7 @@ export class DOOM{
             }
         }
 
-        this.WebAssembly = WebAssembly.instantiateStreaming(fetch("doom/doom.wasm"), importObject)
+        this.WebAssembly = WebAssembly.instantiateStreaming(fetch("apps/doom/doom.wasm"), importObject)
         console.log(this.WebAssembly)
         this.WebAssembly.then(obj => {
             /*Initialize Doom*/
