@@ -88,6 +88,7 @@ export class Element {
         // Empty
     }
 }
+
 class Enumerable extends Element {
     constructor(width,height,type,ctx){
         super(width,height,type,ctx)
@@ -188,6 +189,7 @@ class Enumerable extends Element {
         }
     }
 }
+
 export class List extends Enumerable {
     constructor(width,height,ctx){
         super(width,height,"List",ctx)
@@ -501,7 +503,7 @@ export class HTMLElement extends Enumerable {
 
 export class DebugSquare extends Element {
     constructor(width,height,ctx){
-        super(width,height,"HTMLElement",ctx)
+        super(width,height,"DebugSquare",ctx)
     }
 
     afterInit(){
@@ -510,6 +512,9 @@ export class DebugSquare extends Element {
 
     // eslint-disable-next-line no-unused-vars
     draw(ctx){
+        if(this.color){
+            ctx.fillStyle = this.color
+        }
         ctx.beginPath()
         ctx.roundRect(this.x + (this.padding/2) + this.xOffset,
             this.y + (this.padding/2) + this.yOffset,
@@ -539,4 +544,5 @@ const Elements = {
     "HTMLElement": HTMLElement,
     "DebugSquare": DebugSquare,
 }
+
 export { Elements }

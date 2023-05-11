@@ -6,11 +6,33 @@
             "elements": {
                 "0": {
                     "DebugSquare": {
-                        "id": "cover",
-                        "width": "{fullW}/3",
-                        "height": "{fullW}/3",
+                        "id": "history",
+                        "color": "red",
+                        "width": "{fullW}-30",
+                        "height": "{fullW}/4",
                         "rounded": 5,
                         "padding": 30
+                    }
+                },
+                "1": {
+                    "DebugSquare": {
+                        "id": "current",
+                        "color": "red",
+                        "width": "{fullW}-30",
+                        "height": "{fullW}/6",
+                        "rounded": 5,
+                        "xOffset": 15
+                    }
+                },
+                "2": {
+                    "DebugSquare": {
+                        "id": "buttons",
+                        "color": "red",
+                        "width": "{fullW}-30",
+                        "height": "{fullH}-({fullW}/4)-30-({fullW}/6)-30",
+                        "rounded": 5,
+                        "yOffset": 15,
+                        "xOffset": 15
                     }
                 }
             }
