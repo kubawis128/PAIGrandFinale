@@ -1,4 +1,4 @@
-import { WGM } from "../windowManager/WGM/WGM.js"
+import { WGM } from "../../windowManager/WGM/WGM.js"
 export class MusicPlayerWGM {
     constructor(canvas, assetManager){
         this.canvas = canvas
@@ -7,7 +7,7 @@ export class MusicPlayerWGM {
         this.list_of_songs_json = JSON.parse(this.assetManager.assets.musicPlayer.songs)
         this.list_of_songs = Object.keys(this.list_of_songs_json)
         this.currentSongNr = 0
-        this.WGM = new WGM(this.assetManager.assets.musicPlayer.layout,this.canvas)
+        this.WGM = new WGM(this.assetManager.assets.Layouts.musicPlayer,this.canvas)
         this.audioCtx = new AudioContext()
         this.playing = false
         this.gainNode = this.audioCtx.createGain()

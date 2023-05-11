@@ -11,7 +11,8 @@
                         "width": "{fullW}-30",
                         "height": "{fullW}/4",
                         "rounded": 5,
-                        "padding": 30
+                        "padding": 30,
+                        "color": "#ffffff"
                     }
                 },
                 "1": {
