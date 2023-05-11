@@ -62,7 +62,7 @@ icons.push(new Icon(500, 100, "Music Player", assetLoader.assets.icons.music, ()
 }))
 
 icons.push(new Icon(700, 100, "Current Weather", assetLoader.assets.icons.music, () => {
-    let calcWindow = new Window(100,300, 400, 300, "Weather","canvas",renderer)
+    let calcWindow = new Window(100,300, 400, 150, "Weather","canvas",renderer)
 
     calcWindow.instance = new WeatherWGM(calcWindow.inner,assetLoader)
 

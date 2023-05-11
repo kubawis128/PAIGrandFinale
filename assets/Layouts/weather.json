@@ -12,7 +12,8 @@
                                     "id": "icon",
                                     "src": "weather/icons/01.png",
                                     "width": 64,
-                                    "height": 64
+                                    "height": 64,
+                                    "yOffset": 10
                                 }
                             },
                             "1": {
@@ -25,11 +26,25 @@
                                                 "font": "64px Minecraft"
                                             }
                                         },
-                                        "1": {
-                                            "Text": {
-                                                "id": "temperature",
-                                                "content": "xx°",
-                                                "font": "32px Minecraft"
+                                        "1":{
+                                            "Grid":{
+                                                "elements":{
+                                                    "0": {
+                                                        "Text": {
+                                                            "id": "temperature",
+                                                            "content": "xx°",
+                                                            "font": "48px Minecraft"
+                                                        }
+                                                    },
+                                                    "1": {
+                                                        "Text": {
+                                                            "id": "description",
+                                                            "content": "Sunny",
+                                                            "font": "48px Minecraft",
+                                                            "xOffset": 32
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -57,7 +72,8 @@
                                     "xOffset": 10
                                 }
                             }
-                        }
+                        },
+                        "yOffset": 10
                     }
                 }
             }
