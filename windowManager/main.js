@@ -70,54 +70,83 @@ icons.push(new Icon(700, 100, "Current Weather", assetLoader.assets.icons.music,
 }))
 
 document.addEventListener("mousedown", (event) => {
-    if(event.target.id == "screen" || event.target.id == "titlebar"){
-        if(event.target.id == "screen") {
-            icons.forEach(icon => {
-                if(icon.check_collision(event.clientX, event.clientY)){
-                    icon.exec()
-                }
-            })
+    let index = -1
+    let clickedWindow = renderer.window_list.find((value) => {
+        index += 1
+        return value.uuid == event.target.id 
+    })
+    let tmp = renderer.getClickedWindow(event.clientX, event.clientY)
+    if(!clickedWindow){
+        if(tmp){
+            clickedWindow = tmp.window
+            index = renderer.window_list.indexOf(clickedWindow)
         }
+    }
 
-        let clickedWindow = renderer.getClickedWindow(event.clientX, event.clientY)
-        if(clickedWindow && clickedWindow.action == "close"){
-            renderer.closeWindow(clickedWindow.window)
-        }
-        if(clickedWindow && clickedWindow.action == "minimize"){
-            console.warn("try minimize window")
-            clickedWindow.window.minimize()
-        }
-
-        let x = 86
-        renderer.window_list.forEach((window) => {
-            if(event.clientX >= x-2 && event.clientX <= x + renderer.ctx.measureText(window.title).width+4  && event.clientY >= 1080-28  && event.clientY <=  1080-4){
-                window.switchMinimized()
-            }
-            x += renderer.ctx.measureText(window.title).width + 8
+    if(clickedWindow){
+        // bring the window to the front
+        //let index = renderer.window_list.indexOf(clickedWindow.window)
+        renderer.window_list.splice(index,1)
+        renderer.window_list.unshift(clickedWindow)  
+        
+        let i = 0
+        renderer.window_list.forEach(window => {
+            window.changeZIndex(i)
+            i += 1
         })
     }
+    if(event.target.id == "screen") {
+        icons.forEach(icon => {
+            if(icon.check_collision(event.clientX, event.clientY)){
+                icon.exec()
+            }
+        })
+    }
+    if(event.target.id == "titlebar"){
+        if(clickedWindow){
+            dragged_window = clickedWindow
+            clickedWindow.setHolding(event.clientX, event.clientY)
+            if(tmp.action == "close"){
+                renderer.closeWindow(clickedWindow)
+            } 
+            console.log(tmp)
+            if(tmp.action == "minimize"){
+                console.warn("try minimize window")
+                clickedWindow.minimize()
+            }
+        }
+    }else{
+        if(clickedWindow){
+            clickedWindow.handleClick(event.clientX, event.clientY)
+        }
+    }
+            
+    let x = 86
+    renderer.window_list.forEach((window) => {
+        if(event.clientX >= x-2 && event.clientX <= x + renderer.ctx.measureText(window.title).width+4  && event.clientY >= 1080-28  && event.clientY <=  1080-4){
+            console.log(window.zIndex)
+            if(window.minimized){
+                window.switchMinimized()
+            }else{
+                if(window.zIndex == 0){
+                    window.switchMinimized()
+                }else{
+                    let index = renderer.window_list.indexOf(window)
+                    renderer.window_list.splice(index,1)
+                    renderer.window_list.unshift(window)  
+                    let i = 0
+                    renderer.window_list.forEach(window2 => {
+                        window2.changeZIndex(i)
+                        i += 1
+                    })
+                }
+            }
+        }
+        x += renderer.ctx.measureText(window.title).width + 8
+    })
 })
 
 let dragged_window = null
-document.addEventListener("mousedown", (event) => {
-    if(event.target.id == "screen" || event.target.id == "titlebar"){
-        let clicked = renderer.getClickedWindow(event.clientX, event.clientY)
-        console.log(clicked)
-        if(clicked){
-            dragged_window = clicked.window
-            dragged_window.setHolding(event.clientX, event.clientY)
-        }
-    }else {
-
-        let clicked_window = renderer.window_list.find((value) => {
-            return value.uuid == event.target.id 
-        })
-
-        console.log("Clicked Window:", clicked_window)
-        clicked_window.handleClick(event.clientX, event.clientY)
-    }
-})
-
 document.addEventListener("mousemove", (event) => {
     if(dragged_window && (event.target.id == "screen" || event.target.id == "titlebar")){
         dragged_window.x -= dragged_window.holdingX - event.clientX
@@ -130,10 +159,8 @@ document.addEventListener("mousemove", (event) => {
     }*/
 })
 
-document.addEventListener("mouseup", (event) => {
-    if(event.target.id == "screen" || event.target.id == "titlebar"){
-        dragged_window = null
-    }
+document.addEventListener("mouseup", () => {
+    dragged_window = null
 })
 
 setInterval(function (){

@@ -1,6 +1,6 @@
 {
     "background": "#414348",
-    "elements": {
+    "contexts": {
         "List": {
             "width":"{fullW}",
             "elements": {

@@ -1,8 +1,16 @@
 {
     "background": "#414348",
-    "elements": {
+    "contexts": {
+        "Text": {
+            "id": "loading_context",
+            "content": "Loading...",
+            "font": "84px Minecraft",
+            "align": "centerScreen",
+            "yOffset": 16
+        },
         "List": {
             "width":"{fullW}",
+            "id": "main_context",
             "elements": {
                 "0":{
                     "Grid": {

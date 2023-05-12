@@ -18,10 +18,10 @@ export class WeatherWGM {
             // maybe print that it is updating currently
             return
         }
+        this.WGM.selectContextByID("main_context")
         this.WGM.getByID("city").content = this.weatherData.name
         this.WGM.getByID("temperature").content = parseFloat(parseFloat(this.weatherData.main.temp - 273.15).toFixed(2)) + "°"
         this.WGM.getByID("description").content = this.weatherData.weather[0].description
-        //console.log(this.weatherData.weather[0].description)
         this.WGM.getByID("feels").content =  "Feels like: " + parseFloat(parseFloat(this.weatherData.main.feels_like - 273.15).toFixed(2)) + "°"
         this.WGM.getByID("humidity").content = "Humidity: " + this.weatherData.main.humidity + "%"
         console.log("weather/icons/" + this.weatherData.weather[0].icon.substring(0,2) + ".png")
@@ -33,29 +33,4 @@ export class WeatherWGM {
     destroy(){
         console.log("Bye From weather")
     }
-
-    /*iconIdToName(id){
-        switch(id){
-        case "01":
-            return "clearSky"
-        case "02":
-            return "fewClouds"
-        case "03":
-            return "scatteredClouds"
-        case "04":
-            return "brokenClouds"
-        case "09":
-            return "showerRain"
-        case "10":
-            return "rain"
-        case "11":
-            return "thunderstorm"
-        case "13":
-            return "snow"
-        case "50":
-            return "mist"
-        default:
-            return "invalid"
-        }
-    }*/
 }
