@@ -1,5 +1,7 @@
 {
     "background": "#414348",
+    "xSize": 360,
+    "ySize": 500,
     "contexts": {
         "List": {
             "width":"{fullW}",

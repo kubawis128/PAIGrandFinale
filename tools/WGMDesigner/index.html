@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        div {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <button id="prev">Prev</button>
+        <button id="next">Next</button>
+        <br/>
+        <canvas id="treePreview" height="400" width="200"></canvas>
+        <canvas id="preview"></canvas>
+        <br/>
+        <textarea type="text" rows="40" cols="225" id="inOutLayout"></textarea>
+    </div>
+    <script type="module" src="./previewRenderer.js" defer></script>
+</body>
+</html>

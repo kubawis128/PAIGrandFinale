@@ -17,7 +17,6 @@ export class WGM {
             for(var elementKeys in currentElement){
                 element[elementKeys] = currentElement[elementKeys]
                 if(element.isEnumerable){
-                    //console.log("Children owns children")
                     element.parseChildren(element)
                 }
             }

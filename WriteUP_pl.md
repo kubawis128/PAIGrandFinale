@@ -51,8 +51,8 @@ W tym:
 - [ ] Klon Pasjansa
 - [ ] Klon Snake
 - [ ] Klon Painta
-- [x] Własny toolkit do tworzenia GUI z pomocą json
 - [ ] Pseudo-Pliki zapisywane jako ciasteczka (zapisy gry z dooma, rysunki z painta, itp)
+- [x] Własny toolkit do tworzenia GUI z pomocą json
 - [ ] Zestaw własnych narzędzi do ułatwienia tworzenia GUI (Coś jak narzędzie `glide` do GTK)
 - [ ] Widgety do pulpitu
 - [ ] Lepsze (tzn. Jakiekolwiek) wsparcie WCAG

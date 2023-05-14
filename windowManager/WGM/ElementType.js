@@ -100,10 +100,7 @@ class Enumerable extends Element {
 
         if(element.elements){
             for(var childElement in element.elements){
-
-                
                 let currentElement = element.elements[childElement]
-                console.warn(currentElement)
                 let element1 = new Elements[Object.keys(currentElement)[0]]
                 element1.ctx = this.ctx
                 

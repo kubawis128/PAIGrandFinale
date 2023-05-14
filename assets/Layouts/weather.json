@@ -1,5 +1,7 @@
 {
     "background": "#414348",
+    "xSize": 400,
+    "ySize": 150,
     "contexts": {
         "Text": {
             "id": "loading_context",
@@ -48,8 +50,9 @@
                                                         "Text": {
                                                             "id": "description",
                                                             "content": "Sunny",
-                                                            "font": "48px Minecraft",
-                                                            "xOffset": 32
+                                                            "font": "24px Minecraft",
+                                                            "xOffset": 32,
+                                                            "yOffset": 16
                                                         }
                                                     }
                                                 }
