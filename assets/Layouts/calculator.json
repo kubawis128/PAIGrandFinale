@@ -1,6 +1,8 @@
 {
     "background": "#414348",
-    "elements": {
+    "xSize": 360,
+    "ySize": 500,
+    "contexts": {
         "List": {
             "width":"{fullW}",
             "elements": {
@@ -11,8 +13,7 @@
                         "width": "{fullW}-30",
                         "height": "{fullW}/4",
                         "rounded": 5,
-                        "padding": 30,
-                        "color": "#ffffff"
+                        "padding": 30
                     }
                 },
                 "1": {

@@ -43,16 +43,16 @@ W tym:
 - [x] Początki pulpitu
 - [x] Działające okienka (Można je: przesuwać, minimalizować, zamykać)
 - [ ] Bardziej działające okienka (skalowanie)
-- [ ] Poprawne indexowanie w osi z (css `z-index`)
-- [ ] Odtwarzacz muzyki (html tag `audio`)
-- [ ] Kalkulator
+- [x] Poprawne indexowanie w osi z (css `z-index`)
+- [x] Odtwarzacz muzyki (html tag `audio`)
+- [~] Kalkulator
 - [ ] Zegar + Kalendarz
-- [ ] Pogoda (openweathermap)
+- [x] Pogoda (openweathermap)
 - [ ] Klon Pasjansa
 - [ ] Klon Snake
 - [ ] Klon Painta
-- [ ] Własny toolkit do tworzenia GUI z pomocą json
 - [ ] Pseudo-Pliki zapisywane jako ciasteczka (zapisy gry z dooma, rysunki z painta, itp)
+- [x] Własny toolkit do tworzenia GUI z pomocą json
 - [ ] Zestaw własnych narzędzi do ułatwienia tworzenia GUI (Coś jak narzędzie `glide` do GTK)
 - [ ] Widgety do pulpitu
 - [ ] Lepsze (tzn. Jakiekolwiek) wsparcie WCAG

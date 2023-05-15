@@ -37,7 +37,8 @@ export class Window{
         this.oldx = x
         this.oldy = y
         this.minimized = false
-
+        
+        this.zIndex = 0
     }
     
     draw(){
@@ -195,5 +196,11 @@ export class Window{
         this.windowCanvas.height = height+34
         this.width = this.windowCanvas.width
         this.height = this.windowCanvas.height
+    }
+
+    changeZIndex(index){
+        this.windowCanvas.style.zIndex = index * -1
+        this.inner.style.zIndex = index * -1
+        this.zIndex = this.windowCanvas.style.zIndex
     }
 }

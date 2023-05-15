@@ -13,6 +13,7 @@
         position: absolute;
         left: 0;
         top: 0;
+        z-index: inherit;
       }
       @font-face {
         font-family: Minecraft;
@@ -21,7 +22,7 @@
     </style>
   </head>
   <body>
-    <canvas id="screen" width="1920" height="1080"></canvas>
+    <canvas style="z-index: -100;" id="screen" width="1920" height="1080"></canvas>
     <script type="module" src="windowManager/main.js" defer></script>
   </body>
 </html>

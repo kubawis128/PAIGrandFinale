@@ -100,10 +100,7 @@ class Enumerable extends Element {
 
         if(element.elements){
             for(var childElement in element.elements){
-
-                
                 let currentElement = element.elements[childElement]
-                console.warn(currentElement)
                 let element1 = new Elements[Object.keys(currentElement)[0]]
                 element1.ctx = this.ctx
                 
@@ -437,6 +434,7 @@ export class HTMLElement extends Enumerable {
     afterInit(){
         this.tag = document.createElement(this.HTMLtag)
         this.tag.style.position = "absolute"
+        this.tag.style.zIndex = this.ctx.canvas.style.zIndex
         console.warn(this.x + (this.padding / 2) + parseInt(this.ctx.canvas.style.left) + "px")
         this.tag.style.left = this.x + (this.padding / 2) + this.xOffset + parseInt(this.ctx.canvas.style.left) + "px"
         this.tag.style.top = this.y + (this.padding / 2) + this.yOffset + parseInt(this.ctx.canvas.style.top) + "px"
@@ -464,6 +462,7 @@ export class HTMLElement extends Enumerable {
         this.tag.style.top = this.y + (this.padding / 2) + this.yOffset + parseInt(this.ctx.canvas.style.top) + "px"
         this.tag.style.width = this.width + "px"
         this.tag.style.height = this.height + "px"
+        this.tag.style.zIndex = this.ctx.canvas.style.zIndex
         // Browser handles the rest
     }
 
