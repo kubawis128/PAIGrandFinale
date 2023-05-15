@@ -40,8 +40,9 @@
                                                         "Text": {
                                                             "id": "description",
                                                             "content": "Sunny",
-                                                            "font": "48px Minecraft",
-                                                            "xOffset": 32
+                                                            "font": "24px Minecraft",
+                                                            "xOffset": 32,
+                                                            "yOffset": 12
                                                         }
                                                     }
                                                 }

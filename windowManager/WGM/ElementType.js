@@ -504,7 +504,6 @@ export class HTMLElement extends Enumerable {
 export class DebugSquare extends Element {
     constructor(width,height,ctx){
         super(width,height,"DebugSquare",ctx)
-        super(width,height,"DebugSquare",ctx)
     }
 
     afterInit(){
