@@ -7,7 +7,7 @@
 # Browser Specific:
 
 ## Firefox:
-- [ ] There is no `ctx.roundRect()` function - can be fixed by manualy creating this function
+- [x] There is no `ctx.roundRect()` function - can be fixed by manualy creating this function (fixed in firefox version 112)
 
 ## Firefox Nightly:
 ### So far no problems found

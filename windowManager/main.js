@@ -19,7 +19,7 @@ let renderer = new Renderer(document.getElementById("screen"))
 
 console.log(assetLoader)
 let icons = []
-icons.push(new Icon(100, 100, "Tetris", assetLoader.assets.icons.tetris, () => {
+icons.push(new Icon(100, 32, "Tetris", assetLoader.assets.icons.tetris, () => {
     let tetrisWindow = new Window(100,200, 300, 440, "Tetris.js", "canvas")
 
     renderer.addWindow(tetrisWindow)
@@ -27,7 +27,7 @@ icons.push(new Icon(100, 100, "Tetris", assetLoader.assets.icons.tetris, () => {
     new Game(tetrisWindow.inner)
 }))
 
-icons.push(new Icon(100, 200, "DOOM", assetLoader.assets.icons.doom, () => {
+icons.push(new Icon(100, 132, "DOOM", assetLoader.assets.icons.doom, () => {
     let doomWindow = new Window(100,200, 640, 400, "DOOM","canvas", renderer)
 
     doomWindow.instance = new DOOM(doomWindow.inner, doomWindow)
@@ -43,7 +43,7 @@ icons.push(new Icon(100, 200, "DOOM", assetLoader.assets.icons.doom, () => {
     renderer.addWindow(calcWindow)
 }))*/
 
-icons.push(new Icon(100, 300, "Video Player", assetLoader.assets.icons.music, () => {
+icons.push(new Icon(100, 232, "Video Player", assetLoader.assets.icons.music, () => {
     let videoWindow = new Window(100,300, 640, 550, "Video Player","canvas",renderer)
 
     videoWindow.instance = new VideoPlayerWGM(videoWindow.inner,assetLoader)
@@ -53,7 +53,7 @@ icons.push(new Icon(100, 300, "Video Player", assetLoader.assets.icons.music, ()
     renderer.addWindow(videoWindow)
 }))
 
-icons.push(new Icon(100, 400, "Music Player", assetLoader.assets.icons.music, () => {
+icons.push(new Icon(100, 332, "Music Player", assetLoader.assets.icons.music, () => {
     let musicWindow = new Window(100,300, 400, 300, "Music Player WGM","canvas",renderer)
 
     musicWindow.instance = new MusicPlayerWGM(musicWindow.inner,assetLoader)
@@ -61,7 +61,7 @@ icons.push(new Icon(100, 400, "Music Player", assetLoader.assets.icons.music, ()
     renderer.addWindow(musicWindow)
 }))
 
-icons.push(new Icon(100, 500, "Current Weather", assetLoader.assets.icons.weather, () => {
+icons.push(new Icon(100, 432, "Current Weather", assetLoader.assets.icons.weather, () => {
     let weatherWindow = new Window(100,300, 400, 150, "Weather","canvas",renderer)
 
     weatherWindow.instance = new WeatherWGM(weatherWindow.inner,assetLoader)
@@ -104,7 +104,7 @@ document.addEventListener("mousedown", (event) => {
         if(event.clientX >= 0 && event.clientX <= 86 && event.clientY >= 1080-28  && event.clientY <=  1080-4){
             desk.switch_menu()
         }else{
-            if(event.clientX >= 0 && event.clientX <= 400 && event.clientY >= 480  && event.clientY <= 1048){
+            if(event.clientX >= 0 && event.clientX <= 400 && event.clientY >= 480  && event.clientY <= 1048 && desk.opened_menu){
                 desk.check_collision_on_menu(event.clientX, event.clientY - 480)
             }else{
                 desk.opened_menu = false

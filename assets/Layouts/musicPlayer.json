@@ -51,7 +51,7 @@
                                                 "xOffset": 40,
                                                 "height": "20",
                                                 "padding": 5,
-                                                "rounded": 20,
+                                                "rounded": 5,
                                                 "position": 0,
                                                 "sliderType": "horizontal"
                                             }
@@ -115,7 +115,7 @@
                                                 "width": "10",
                                                 "height": "80",
                                                 "padding": 10,
-                                                "rounded": 10,
+                                                "rounded": 3,
                                                 "position": 100,
                                                 "sliderType": "vertical"
                                             }
