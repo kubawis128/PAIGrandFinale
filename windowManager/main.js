@@ -6,7 +6,6 @@ import {Loader} from "./assetManager.js"
 // Applications
 import {Game} from "../apps/tetris/tetris.js"
 import {DOOM} from "../apps/doom/doom.js"
-import {CalcWGM} from "../apps/calc/main.js"
 
 import {MusicPlayerWGM} from "../apps/musicPlayer-WGM/main.js"
 import {VideoPlayerWGM} from "../apps/videoPlayer/main.js"
@@ -16,7 +15,8 @@ let assetLoader = new Loader()
 
 let renderer = new Renderer(document.getElementById("screen"))
 
-let desk = new Desktop(renderer,assetLoader.assets.desktop.wallpaper)
+
+
 console.log(assetLoader)
 let icons = []
 icons.push(new Icon(100, 100, "Tetris", assetLoader.assets.icons.tetris, () => {
@@ -27,7 +27,7 @@ icons.push(new Icon(100, 100, "Tetris", assetLoader.assets.icons.tetris, () => {
     new Game(tetrisWindow.inner)
 }))
 
-icons.push(new Icon(200, 100, "DOOM", assetLoader.assets.icons.doom, () => {
+icons.push(new Icon(100, 200, "DOOM", assetLoader.assets.icons.doom, () => {
     let doomWindow = new Window(100,200, 640, 400, "DOOM","canvas", renderer)
 
     doomWindow.instance = new DOOM(doomWindow.inner, doomWindow)
@@ -35,39 +35,41 @@ icons.push(new Icon(200, 100, "DOOM", assetLoader.assets.icons.doom, () => {
     renderer.addWindow(doomWindow)
 }))
 
-icons.push(new Icon(300, 100, "Calculator", assetLoader.assets.icons.doom, () => {
+/*icons.push(new Icon(300, 100, "Calculator", assetLoader.assets.icons.doom, () => {
     let calcWindow = new Window(100,200, 360, 500, "Calculator","canvas",renderer)
 
     calcWindow.instance = new CalcWGM(calcWindow.inner, assetLoader)
 
     renderer.addWindow(calcWindow)
-}))
+}))*/
 
-icons.push(new Icon(400, 100, "Video Player", assetLoader.assets.icons.music, () => {
-    let calcWindow = new Window(100,300, 640, 550, "Video Player","canvas",renderer)
+icons.push(new Icon(100, 300, "Video Player", assetLoader.assets.icons.music, () => {
+    let videoWindow = new Window(100,300, 640, 550, "Video Player","canvas",renderer)
 
-    calcWindow.instance = new VideoPlayerWGM(calcWindow.inner,assetLoader)
+    videoWindow.instance = new VideoPlayerWGM(videoWindow.inner,assetLoader)
     
-    calcWindow.instance.window = calcWindow
+    videoWindow.instance.window = videoWindow
 
-    renderer.addWindow(calcWindow)
+    renderer.addWindow(videoWindow)
 }))
 
-icons.push(new Icon(500, 100, "Music Player", assetLoader.assets.icons.music, () => {
-    let calcWindow = new Window(100,300, 400, 300, "Music Player WGM","canvas",renderer)
+icons.push(new Icon(100, 400, "Music Player", assetLoader.assets.icons.music, () => {
+    let musicWindow = new Window(100,300, 400, 300, "Music Player WGM","canvas",renderer)
 
-    calcWindow.instance = new MusicPlayerWGM(calcWindow.inner,assetLoader)
+    musicWindow.instance = new MusicPlayerWGM(musicWindow.inner,assetLoader)
 
-    renderer.addWindow(calcWindow)
+    renderer.addWindow(musicWindow)
 }))
 
-icons.push(new Icon(700, 100, "Current Weather", assetLoader.assets.icons.music, () => {
-    let calcWindow = new Window(100,300, 400, 150, "Weather","canvas",renderer)
+icons.push(new Icon(100, 500, "Current Weather", assetLoader.assets.icons.weather, () => {
+    let weatherWindow = new Window(100,300, 400, 150, "Weather","canvas",renderer)
 
-    calcWindow.instance = new WeatherWGM(calcWindow.inner,assetLoader)
+    weatherWindow.instance = new WeatherWGM(weatherWindow.inner,assetLoader)
 
-    renderer.addWindow(calcWindow)
+    renderer.addWindow(weatherWindow)
 }))
+
+let desk = new Desktop(renderer,assetLoader.assets.desktop.wallpaper, icons)
 
 document.addEventListener("mousedown", (event) => {
     let index = -1
@@ -84,8 +86,6 @@ document.addEventListener("mousedown", (event) => {
     }
 
     if(clickedWindow){
-        // bring the window to the front
-        //let index = renderer.window_list.indexOf(clickedWindow.window)
         renderer.window_list.splice(index,1)
         renderer.window_list.unshift(clickedWindow)  
         
@@ -101,6 +101,15 @@ document.addEventListener("mousedown", (event) => {
                 icon.exec()
             }
         })
+        if(event.clientX >= 0 && event.clientX <= 86 && event.clientY >= 1080-28  && event.clientY <=  1080-4){
+            desk.switch_menu()
+        }else{
+            if(event.clientX >= 0 && event.clientX <= 400 && event.clientY >= 480  && event.clientY <= 1048){
+                desk.check_collision_on_menu(event.clientX, event.clientY - 480)
+            }else{
+                desk.opened_menu = false
+            }
+        }
     }
     if(event.target.id == "titlebar"){
         if(clickedWindow){
@@ -154,9 +163,6 @@ document.addEventListener("mousemove", (event) => {
         dragged_window.setHolding(event.clientX, event.clientY)
         update()
     }
-    /*if(dragged_window && (event.target.id != "screen" || event.target.id != "titlebar")){
-        dragged_window = null
-    }*/
 })
 
 document.addEventListener("mouseup", () => {
@@ -169,6 +175,5 @@ setInterval(function (){
 
 function update(){
     desk.draw()
-    desk.drawIcons(icons)
     renderer.updateWindows()
 }

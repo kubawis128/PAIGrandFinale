@@ -6,6 +6,7 @@ export class Loader{
                 doom: "doom.png",
                 tetris: "tetris.png",
                 music: "music.png",
+                weather: "weather.png",
             },
             desktop: {
                 wallpaper: "wallpaper.png",
